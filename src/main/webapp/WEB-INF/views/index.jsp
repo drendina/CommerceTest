@@ -7,5 +7,6 @@
 ${greetings}
 
 <% System.out.println("Prova Jsp"); %>
+
 </body>
 </html>
