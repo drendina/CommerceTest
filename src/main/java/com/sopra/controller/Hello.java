@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 public class Hello {
 
     private static final Logger logger = Logger.getLogger(Hello.class);
-    
+
     @RequestMapping(method = RequestMethod.GET, value = "/index")
     public ModelAndView getPage() {
         ModelAndView mv = new ModelAndView("index");
