@@ -1,5 +1,6 @@
 package com.sopra.controller;
 
+import com.sopra.dBConnection.ProvaJDBC;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,9 @@ public class Hello {
         ModelAndView mv = new ModelAndView("index");
         mv.addObject("greetings", "hello there!");
         logger.info("Create page index.jsp");
+
+        ProvaJDBC jdbc = new ProvaJDBC();
+        jdbc.useDB();
 
         return mv;
     }
