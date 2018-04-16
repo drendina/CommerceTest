@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
     <body>
-    <form:form method="post" action="/index/addStudent" modelAttribute="studente">
+    <form:form method="POST" action="/index/addStudent" modelAttribute="studente">
         <table>
             <tr>
                 <td><form:label path="id">Id</form:label></td>

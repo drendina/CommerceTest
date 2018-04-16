@@ -14,7 +14,6 @@ import java.util.LinkedList;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudenteDAO studenteDAO;
-
     private LinkedList<Studente> studentList;
 
     @Override
@@ -22,12 +21,14 @@ public class StudentServiceImpl implements StudentService {
 
         return (LinkedList<Studente>) studenteDAO.selectAll();
     }
-    public LinkedList<Studente> passingDataForQuery(int data){
+    @Override
+    public Studente passingDataForQuery(int data){
 
-        return studentList = (LinkedList<Studente>) studenteDAO.selectById(data);
+        return studenteDAO.selectById(data);
     }
+    @Override
     public LinkedList<Studente> passingDataForQuery(String data){
 
-       return studentList = (LinkedList<Studente>) studenteDAO.getStudentList(data);
+       return studentList = (LinkedList<Studente>) studenteDAO.selectByFirstname(data);
     }
 }

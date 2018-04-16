@@ -1,5 +1,8 @@
 package com.sopra.model;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Studente {
 
     private int id;

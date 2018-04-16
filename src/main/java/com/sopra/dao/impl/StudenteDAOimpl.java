@@ -22,17 +22,20 @@ public class StudenteDAOimpl implements StudenteDAO {
 
     @Override
     public Studente selectById(int id){
-        List<Studente> testList= getStudentList("SELECT * FROM studenti WHERE id = \"" + id + "\"");
-        if (testList.get(0) != null)
-            return  testList.get(0);
+        List<Studente> testList= getStudentList("SELECT * FROM studenti WHERE id = " + id );
+        if (testList == null || testList.isEmpty())
+        {logger.info("List is empty");
+            return  null;}
         else
-            return null;
+            logger.info(testList.get(0));
+            return testList.get(0);
     }
 
     @Override
     public List<Studente> selectByFirstname(String nome){
         return getStudentList("SELECT * FROM studenti WHERE firstname = \"" + nome + "\"");
     }
+
 
     @Override
     public List<Studente> getStudentList(String query){
