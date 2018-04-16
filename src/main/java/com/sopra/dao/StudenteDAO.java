@@ -10,4 +10,5 @@ public interface StudenteDAO {
      Studente selectById(int id);
      List<Studente> selectByFirstname(String nome);
      List<Studente> getStudentList(String nome);
+     List<Studente> getAllStudents();
 }

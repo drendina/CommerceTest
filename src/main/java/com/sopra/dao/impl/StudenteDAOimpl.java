@@ -3,6 +3,8 @@ package com.sopra.dao.impl;
 import com.sopra.dao.StudenteDAO;
 import com.sopra.model.Studente;
 import org.apache.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -12,9 +14,11 @@ import java.util.List;
 
 
 @Repository
-public class StudenteDAOimpl implements StudenteDAO {
-
+public class StudenteDAOimpl implements StudenteDAO  {
+    @Autowired
+    private SessionFactory sessionFactory;
     private static final Logger logger = Logger.getLogger(StudenteDAOimpl.class);
+
     @Override
     public List<Studente> selectAll(){
         return getStudentList("SELECT * FROM studenti");
@@ -35,7 +39,6 @@ public class StudenteDAOimpl implements StudenteDAO {
     public List<Studente> selectByFirstname(String nome){
         return getStudentList("SELECT * FROM studenti WHERE firstname = \"" + nome + "\"");
     }
-
 
     @Override
     public List<Studente> getStudentList(String query){
@@ -79,6 +82,11 @@ public class StudenteDAOimpl implements StudenteDAO {
         }
 
         return studenteList;
+    }
+
+    @Override
+    public List<Studente> getAllStudents(){
+            return sessionFactory.getCurrentSession().createQuery("from studenti").list();
     }
 
 

@@ -19,7 +19,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public LinkedList<Studente> passingDataForQuery(){
 
-        return (LinkedList<Studente>) studenteDAO.selectAll();
+        return (LinkedList<Studente>) studenteDAO.getAllStudents();
     }
     @Override
     public Studente passingDataForQuery(int data){

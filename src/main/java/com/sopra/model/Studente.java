@@ -2,14 +2,27 @@ package com.sopra.model;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class Studente {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Repository
+@Entity
+@Table(name = "studenti")
+public class Studente implements Serializable {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "firstname")
     private String firstname;
 
+    @Column(name = "lastname")
     private String lastname;
+
+
+    //constructor
     public Studente(){
 
     }
