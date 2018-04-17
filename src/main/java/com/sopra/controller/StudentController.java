@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import javax.transaction.Transactional;
+
 @Controller
+@Transactional
 @RequestMapping(value = "/index")
 public class StudentController {
 
@@ -28,18 +32,23 @@ public class StudentController {
 //    private String name = null;
 //    @Autowired
 //    private Studente studente;
+    private  boolean filtered = false;
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ModelAndView getPage() {
-        LinkedList<Studente> studentList = studentService.passingDataForQuery();
+        List<Studente> studentList = studentService.passingDataForQuery();
+        logger.info(studentList);
         mv.addObject("lista", studentList);
+        mv.addObject("filtered", filtered);
         return mv;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/filter")
     public ModelAndView getPage(@RequestParam String name) {
-        LinkedList<Studente> studentList = studentService.passingDataForQuery(name);
+        List<Studente> studentList = studentService.passingDataForQuery(name);
         mv.addObject("lista", studentList);
+        filtered=true;
+        mv.addObject("filtered", filtered);
         return mv;
     }
 

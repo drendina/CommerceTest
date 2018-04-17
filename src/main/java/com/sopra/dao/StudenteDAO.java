@@ -10,5 +10,7 @@ public interface StudenteDAO {
      Studente selectById(int id);
      List<Studente> selectByFirstname(String nome);
      List<Studente> getStudentList(String nome);
-     List<Studente> getAllStudents();
+     List<Studente> getAllStudentsHibernate();
+     Studente getStudenteHibernate(int id);
+     List<Studente> getStudenteStringHibernate(String name);
 }

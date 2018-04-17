@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 
 
 @Repository
+@Transactional
 public class StudenteDAOimpl implements StudenteDAO  {
     @Autowired
     private SessionFactory sessionFactory;
@@ -84,10 +86,29 @@ public class StudenteDAOimpl implements StudenteDAO  {
         return studenteList;
     }
 
+
+    // -------------- HIBERNATE METHODS -------------------
     @Override
-    public List<Studente> getAllStudents(){
-            return sessionFactory.getCurrentSession().createQuery("from studenti").list();
+    public List<Studente> getAllStudentsHibernate(){
+        logger.info((List<Studente>) sessionFactory.getCurrentSession().createQuery("FROM Studente").list());
+        return  (List<Studente>) sessionFactory.getCurrentSession().createQuery("FROM Studente").list();
     }
 
+//    String hql = "FROM Employee";
+//    Query query = session.createQuery(hql);
+//    List results = query.list();
+//
+
+    @Override
+    public Studente getStudenteHibernate(int id) {
+        logger.info(sessionFactory.getCurrentSession());
+        return (Studente) sessionFactory.getCurrentSession().get(Studente.class, id);
+    }
+    @Override
+    public List<Studente> getStudenteStringHibernate(String name){
+        logger.info("get studente hib dao");
+        return  null;
+
+    }
 
 }
