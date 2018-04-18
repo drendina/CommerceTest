@@ -56,7 +56,7 @@ public class StudentController {
         Studente studente;
         studente = studentService.passingDataForQuery(id);
         logger.info(studente);
-        studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
+        //studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
         return new ModelAndView("studentView", "studente", studente);
 
     }

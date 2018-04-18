@@ -104,11 +104,11 @@ public class StudenteDAOimpl implements StudenteDAO  {
 
     public void modifyStudentHibernate(int id, String nome, String cognome){
         logger.info("hi, i'm hibernate and i'm trying to modify one student " + nome + ", " + cognome);
-        sessionFactory.getCurrentSession().createQuery
-                ("UPDATE Studente set firstname = :new_name lastname = :new_surname WHERE id = :studente_id").
-                setParameter(":new_name", nome).
-                setParameter("new_surname", cognome).
-                setParameter(":studente_id", id);
+//        sessionFactory.getCurrentSession().createQuery
+//                ("UPDATE Studente set firstname = :new_name lastname = :new_surname WHERE id = :studente_id").
+//                setParameter(":new_name", nome).
+//                setParameter("new_surname", cognome).
+//                setParameter(":studente_id", id);
 
     }
 
