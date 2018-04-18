@@ -19,15 +19,17 @@
         }
         /* end reset Chrome default setting*/
     
-        /* DEXTOP SETTINGS*/
+        /* DESKTOP SETTINGS*/
         @media (min-width: 1024px) {
             body{
                 background-color: #9bcaff
             }
+        
             div{
                 width: 100%;
                 box-sizing: border-box;
             }
+        
             p{
                 margin: 0px;
                 height:24px;
@@ -35,46 +37,47 @@
                 text-align: left;
                 font-size: 24px;
             }
-            p#title{
-                display:inline;
-                vertical-align: top;
-            }
+        
         
         
         
             /*-------------- HEADER -------------*/
-            #title{
-                font-style: italic;
-                height: 50px;
-            
-            }
-            #databaseImage{
-                padding:5px;
-                display:inline;
-            }
-        
-            #searchImage{
-                margin:15px;
-                margin-left:3px;
-            }
-            #searchText{
-                margin:15px;
-                margin-right: 0;
-                vertical-align: top;
-                height:24px;
-            }
-        
             #header{
                 display: grid;
                 position: fixed;
                 grid-template-columns: 2fr 1fr;
-                background-color: #c1eeff;
             }
         
+            #title{
+                background-color: #8592f5;
+            }
+                #databaseImage{
+                    padding:3px;
+                    display:inline;
+                }
+                #pageName{
+                    font-style: italic;
+                    height: 50px;
+                    display:inline;
+                    vertical-align: top;
+            }
         
             #search{
                 text-align: right;
+                background-color: #c1eeff;
             }
+                #searchText{
+                    margin:15px;
+                    margin-right: 0;
+                    vertical-align: top;
+                    height:24px;
+                }
+                #searchImage{
+                    margin:15px;
+                    margin-left:3px;
+                }
+        
+        
         
         
             /*-------------- BODY -------------*/
@@ -171,14 +174,17 @@
         /* MOBILE SETTINGS*/
         @media (max-width: 1023px) {
             body{
-                background-color: brown;
+                background-color: #00a4ff;
             }
         }
     </style>
 
 
     <div id = "header">
-        <div id = "title"><img id="databaseImage" src="img/database48.png"> <p id="title">DATABASE STUDENTI</p></div>
+        <div id = "title">
+            <img id="databaseImage" src="img/database48.png">
+            <p id="pageName">DATABASE STUDENTI</p>
+        </div>
         <div id = "search">
             <form method="GET" action="/index/filter">
                 <input id="searchText" type="text" name="name" autocomplete="off">
