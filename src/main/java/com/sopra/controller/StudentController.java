@@ -29,11 +29,9 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-//    private String name = null;
-//    @Autowired
-//    private Studente studente;
     private  boolean filtered = false;
 
+    //OK
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ModelAndView getPage() {
         List<Studente> studentList = studentService.passingDataForQuery();
@@ -42,6 +40,7 @@ public class StudentController {
         mv.addObject("filtered", filtered);
         return mv;
     }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/filter")
     public ModelAndView getPage(@RequestParam String name) {
@@ -57,6 +56,7 @@ public class StudentController {
         Studente studente;
         studente = studentService.passingDataForQuery(id);
         logger.info(studente);
+        studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
         return new ModelAndView("studentView", "studente", studente);
 
     }
@@ -70,7 +70,9 @@ public class StudentController {
         model.addAttribute("firstname", studente.getFirstname());
         model.addAttribute("lastname", studente.getLastname());
         model.addAttribute("id", studente.getId());
-        //modifica del dato nel db
+        logger.info(studente);
+
+//        studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
         
         return "studentView";
     }

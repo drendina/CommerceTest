@@ -19,25 +19,31 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudenteDAO studenteDAO;
-    private LinkedList<Studente> studentList;
-    private static final Logger logger = Logger.getLogger(StudenteDAOimpl.class);
+    //private List<Studente> studentList;
+    private static final Logger logger = Logger.getLogger(StudentServiceImpl.class);
 
     @Override
     @Transactional
     public List<Studente> passingDataForQuery(){
-        logger.info("get all students ()");
-        return (List<Studente>) studenteDAO.selectAll();
+        return studenteDAO.getAllStudentsHibernate();
     }
     @Override
     @Transactional
     public Studente passingDataForQuery(int data){
-    logger.info("passing data for query (ID)");
-        return studenteDAO.getStudenteHibernate(data);
+        logger.info("passing data for query (ID)");
+        return studenteDAO.getStudenteIdHibernate(data);
     }
     @Override
     @Transactional
     public List<Studente> passingDataForQuery(String data){
+       return studenteDAO.getStudenteStringHibernate(data);
+    }
 
-       return studentList = (LinkedList<Studente>) studenteDAO.selectByFirstname(data);
+    @Override
+    @Transactional
+    public void modifyStudent(int id, String nome, String cognome){
+        logger.info("hi, i'm the service and i'm trying to modify one student " + nome + ", " + cognome);
+        studenteDAO.modifyStudentHibernate(id, nome, cognome);
+
     }
 }

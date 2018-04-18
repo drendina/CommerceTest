@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>HomePage</title>
-        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <%--<link rel="stylesheet" type="text/css" href="../../img/style.css"/>--%>
     </head>
 
     <body>
@@ -182,13 +182,13 @@
 
     <div id = "header">
         <div id = "title">
-            <img id="databaseImage" src="img/database48.png">
+            <%--<img id="databaseImage" src="img/database48.png">--%>
             <p id="pageName">DATABASE STUDENTI</p>
         </div>
         <div id = "search">
             <form method="GET" action="/index/filter">
                 <input id="searchText" type="text" name="name" autocomplete="off">
-                <input id="searchImage" type="image" src="img/magnifier.png">
+                <%--<input id="searchImage" type="image" src="../../img/magnifier.png">--%>
             </form>
         </div>
     </div>
@@ -215,7 +215,9 @@
                         <td> ${student.id} </td>
                         <td> ${student.firstname} </td>
                         <td> ${student.lastname} </td>
-                        <td><button id="modify" href="/index/modify?id=${student.id}">Modify</button></td>
+                        <td><a href="/index/modify?id=${student.id}">Modify</a></td>
+                        <%--<td><button id="modify" onclick="window.location=/index/modify?id=${student.id}")>Modify</button></td>--%>
+                        
                     </tr>
                 </c:forEach>
             </table>

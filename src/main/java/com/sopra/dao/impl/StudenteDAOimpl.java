@@ -22,11 +22,6 @@ public class StudenteDAOimpl implements StudenteDAO  {
     private static final Logger logger = Logger.getLogger(StudenteDAOimpl.class);
 
     @Override
-    public List<Studente> selectAll(){
-        return getStudentList("SELECT * FROM studenti");
-    }
-
-    @Override
     public Studente selectById(int id){
         List<Studente> testList= getStudentList("SELECT * FROM studenti WHERE id = " + id );
         if (testList == null || testList.isEmpty())
@@ -56,7 +51,7 @@ public class StudenteDAOimpl implements StudenteDAO  {
                 e1.printStackTrace();
             }
 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test?", "root" , "root");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/studenti?", "root" , "root");
             Statement cmd = con.createStatement();
 
             // query
@@ -90,24 +85,30 @@ public class StudenteDAOimpl implements StudenteDAO  {
     // -------------- HIBERNATE METHODS -------------------
     @Override
     public List<Studente> getAllStudentsHibernate(){
-        logger.info((List<Studente>) sessionFactory.getCurrentSession().createQuery("FROM Studente").list());
         return  (List<Studente>) sessionFactory.getCurrentSession().createQuery("FROM Studente").list();
     }
 
-//    String hql = "FROM Employee";
-//    Query query = session.createQuery(hql);
-//    List results = query.list();
-//
-
     @Override
-    public Studente getStudenteHibernate(int id) {
+    public Studente getStudenteIdHibernate(int id) {
         logger.info(sessionFactory.getCurrentSession());
         return (Studente) sessionFactory.getCurrentSession().get(Studente.class, id);
     }
+
     @Override
     public List<Studente> getStudenteStringHibernate(String name){
-        logger.info("get studente hib dao");
-        return  null;
+        logger.info("get studente with name");
+        return  sessionFactory.getCurrentSession().createQuery
+                ("FROM Studente S WHERE S.firstname = :studente_name").setParameter("studente_name", name).list();
+
+    }
+
+    public void modifyStudentHibernate(int id, String nome, String cognome){
+        logger.info("hi, i'm hibernate and i'm trying to modify one student " + nome + ", " + cognome);
+        sessionFactory.getCurrentSession().createQuery
+                ("UPDATE Studente set firstname = :new_name lastname = :new_surname WHERE id = :studente_id").
+                setParameter(":new_name", nome).
+                setParameter("new_surname", cognome).
+                setParameter(":studente_id", id);
 
     }
 
