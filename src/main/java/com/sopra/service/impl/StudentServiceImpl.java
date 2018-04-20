@@ -1,7 +1,6 @@
 package com.sopra.service.impl;
 
 import com.sopra.dao.StudenteDAO;
-import com.sopra.dao.impl.StudenteDAOimpl;
 import com.sopra.model.Studente;
 import com.sopra.service.StudentService;
 import org.apache.log4j.Logger;
@@ -9,17 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.LinkedList;
 import java.util.List;
 
-//gestione della transazione
+//--------------- Gestione della transazione ---------------------
 
 @Service
 @Transactional
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudenteDAO studenteDAO;
-    //private List<Studente> studentList;
     private static final Logger logger = Logger.getLogger(StudentServiceImpl.class);
 
     @Override
@@ -44,6 +41,11 @@ public class StudentServiceImpl implements StudentService {
     public void modifyStudent(int id, String nome, String cognome){
         logger.info("hi, i'm the service and i'm trying to modify one student " + nome + ", " + cognome);
         studenteDAO.modifyStudentHibernate(id, nome, cognome);
-
+    }
+    @Override
+    @Transactional
+    public Studente passingIdForDelete(int id){
+        logger.info("deleting student with id: "+id);
+        return studenteDAO.deleteById(id);
     }
 }

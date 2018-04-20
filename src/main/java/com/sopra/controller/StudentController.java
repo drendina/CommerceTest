@@ -2,6 +2,7 @@ package com.sopra.controller;
 
 import com.sopra.model.Studente;
 import com.sopra.service.StudentService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,12 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Controller
 @Transactional
@@ -31,7 +28,7 @@ public class StudentController {
     private StudentService studentService;
     private  boolean filtered = false;
 
-    //OK
+
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ModelAndView getPage() {
         List<Studente> studentList = studentService.passingDataForQuery();
@@ -41,25 +38,32 @@ public class StudentController {
         return mv;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/delete")
+    public ModelAndView getpage(@RequestParam int id) {
+        Studente student  = studentService.passingIdForDelete(id);
+        mv.addObject("lista", student);
+        return mv;
+
+    }
+
 
     @RequestMapping(method = RequestMethod.GET, value = "/filter")
     public ModelAndView getPage(@RequestParam String name) {
         List<Studente> studentList = studentService.passingDataForQuery(name);
         mv.addObject("lista", studentList);
-        filtered=true;
-        mv.addObject("filtered", filtered);
+        mv.addObject("filtered", true);
         return mv;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/modify")
     public ModelAndView showForm(@RequestParam int id) {
-        Studente studente;
-        studente = studentService.passingDataForQuery(id);
+        Studente studente = studentService.passingDataForQuery(id);
         logger.info(studente);
-        //studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
+//        studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
         return new ModelAndView("studentView", "studente", studente);
 
     }
+
 
     @RequestMapping(method = RequestMethod.POST, value = "/addStudent")
     public String submit(@ModelAttribute("studente") Studente studente,
@@ -71,9 +75,19 @@ public class StudentController {
         model.addAttribute("lastname", studente.getLastname());
         model.addAttribute("id", studente.getId());
         logger.info(studente);
-
-//        studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
-        
+        //studentService.modifyStudent(studente.getId(), studente.getFirstname(), studente.getLastname());
         return "studentView";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/insert")
+    public String insertIntoDB(ModelMap model) {
+        model.addAttribute("firstname", null);
+        model.addAttribute("lastname", null);
+        model.addAttribute("id", -1);
+        return "studentView";
+    }
+
+
+
+
 }

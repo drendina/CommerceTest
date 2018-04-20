@@ -10,5 +10,7 @@ public interface StudentService {
     List<Studente> passingDataForQuery();
     Studente passingDataForQuery(int data);
     List<Studente> passingDataForQuery(String data);
-    void modifyStudent(int id, String nome, String cognome);
+
+   void modifyStudent(int id, String nome, String cognome);
+   Studente passingIdForDelete(int id);
 }

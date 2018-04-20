@@ -3,13 +3,12 @@ package com.sopra.dao.impl;
 import com.sopra.dao.StudenteDAO;
 import com.sopra.model.Studente;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.sql.*;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -21,68 +20,6 @@ public class StudenteDAOimpl implements StudenteDAO  {
     private SessionFactory sessionFactory;
     private static final Logger logger = Logger.getLogger(StudenteDAOimpl.class);
 
-    @Override
-    public Studente selectById(int id){
-        List<Studente> testList= getStudentList("SELECT * FROM studenti WHERE id = " + id );
-        if (testList == null || testList.isEmpty())
-        {logger.info("List is empty");
-            return  null;}
-        else
-            logger.info(testList.get(0));
-            return testList.get(0);
-    }
-
-    @Override
-    public List<Studente> selectByFirstname(String nome){
-        return getStudentList("SELECT * FROM studenti WHERE firstname = \"" + nome + "\"");
-    }
-
-    @Override
-    public List<Studente> getStudentList(String query){
-
-        logger.info(query);
-
-        LinkedList<Studente> studenteList = null;
-        try {
-            String driver = "com.mysql.jdbc.Driver";
-            try {
-                Class.forName(driver);
-            } catch (ClassNotFoundException e1) {
-                e1.printStackTrace();
-            }
-
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/studenti?", "root" , "root");
-            Statement cmd = con.createStatement();
-
-            // query
-            ResultSet res = cmd.executeQuery(query);
-
-
-            studenteList = new LinkedList<>();
-
-            while (res.next())
-            {
-                Studente temp = new Studente(res.getInt("id"), res.getString("firstname"), res.getString("lastname"));
-                studenteList.add(temp);
-                logger.debug("id: " + res.getInt("id"));
-                logger.debug("firstname: " + res.getString("firstname"));
-                logger.debug("lastname: " + res.getString("lastname"));
-                logger.debug("----------------------------------");
-            }
-
-
-            res.close(); // chiudere le risorse DB è obbligatorio
-            cmd.close();
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return studenteList;
-    }
-
-
-    // -------------- HIBERNATE METHODS -------------------
     @Override
     public List<Studente> getAllStudentsHibernate(){
         return  (List<Studente>) sessionFactory.getCurrentSession().createQuery("FROM Studente").list();
@@ -104,12 +41,21 @@ public class StudenteDAOimpl implements StudenteDAO  {
 
     public void modifyStudentHibernate(int id, String nome, String cognome){
         logger.info("hi, i'm hibernate and i'm trying to modify one student " + nome + ", " + cognome);
-//        sessionFactory.getCurrentSession().createQuery
-//                ("UPDATE Studente set firstname = :new_name lastname = :new_surname WHERE id = :studente_id").
-//                setParameter(":new_name", nome).
-//                setParameter("new_surname", cognome).
-//                setParameter(":studente_id", id);
+        Query query = sessionFactory.getCurrentSession().createQuery
+                ("UPDATE Studente set firstname = " + nome + " lastname = " + cognome + "  WHERE id = " + id);
+       int result = query.executeUpdate();
+       logger.info("Rows affected " + result);
 
+    }
+
+    @Override
+    public Studente deleteById(int id){
+        logger.info("Deleting...");
+        String temp = "DELETE FROM Studente WHERE id = "+ id;
+        Query query = sessionFactory.getCurrentSession().createQuery(temp);
+        logger.info(query);
+        query.executeUpdate();
+        return null;
     }
 
 }
