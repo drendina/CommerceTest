@@ -32,6 +32,10 @@ public class Studente implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
+    public Studente(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 
     public int getId() {
         return id;
@@ -48,13 +52,13 @@ public class Studente implements Serializable {
 //        this.id = id;
 //    }
 //
-//    public void setFirstname(String firstname) {
-//        this.firstname = firstname;
-//    }
-//
-//    public void setLastname(String lastname) {
-//        this.lastname = lastname;
-//    }
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     @Override
     public String toString() {

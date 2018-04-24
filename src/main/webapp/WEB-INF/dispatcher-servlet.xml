@@ -20,6 +20,7 @@
     <!-- Getting Database properties -->
     <context:property-placeholder location="classpath:application.properties" />
 
+    <!--configurazione con annotation-->
     <mvc:annotation-driven/>
 
     <mvc:resources mapping="/risorse/**" location="/risorse/"/>
@@ -39,8 +40,7 @@
     </bean>
 
     <!-- Hibernate SessionFactory -->
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
         <property name="hibernateProperties">
             <props>
@@ -53,12 +53,9 @@
         <property name="packagesToScan" value="com.sopra.model"></property>
     </bean>
 
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
-
-
 
     <tx:annotation-driven transaction-manager="transactionManager" />
 

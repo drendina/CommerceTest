@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
     <body>
-    <form:form method="POST" action="/index/addStudent" modelAttribute="studente">
+    <form:form method="POST" action="/index/updateStudent" modelAttribute="studente">
         <h1>modify student</h1>
         <table>
             <tr>
@@ -26,6 +26,6 @@
         </table>
     </form:form>
     
-    <a href="/index/all">Return to HOME</a>
+    <a href="/index/">Return to HOME</a>
 </body>
 </html>

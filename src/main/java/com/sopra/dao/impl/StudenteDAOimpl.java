@@ -15,14 +15,14 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class StudenteDAOimpl implements StudenteDAO  {
+public class StudenteDAOimpl implements StudenteDAO {
     @Autowired
     private SessionFactory sessionFactory;
     private static final Logger logger = Logger.getLogger(StudenteDAOimpl.class);
 
     @Override
-    public List<Studente> getAllStudentsHibernate(){
-        return  (List<Studente>) sessionFactory.getCurrentSession().createQuery("FROM Studente").list();
+    public List getAllStudentsHibernate() {
+        return sessionFactory.getCurrentSession().createQuery("FROM Studente").list();
     }
 
     @Override
@@ -32,30 +32,38 @@ public class StudenteDAOimpl implements StudenteDAO  {
     }
 
     @Override
-    public List<Studente> getStudenteStringHibernate(String name){
+    public List getStudenteStringHibernate(String name) {
         logger.info("get studente with name");
-        return  sessionFactory.getCurrentSession().createQuery
+        return sessionFactory.getCurrentSession().createQuery
                 ("FROM Studente S WHERE S.firstname = :studente_name").setParameter("studente_name", name).list();
 
     }
 
-    public void modifyStudentHibernate(int id, String nome, String cognome){
-        logger.info("hi, i'm hibernate and i'm trying to modify one student " + nome + ", " + cognome);
-        Query query = sessionFactory.getCurrentSession().createQuery
-                ("UPDATE Studente set firstname = " + nome + " lastname = " + cognome + "  WHERE id = " + id);
-       int result = query.executeUpdate();
-       logger.info("Rows affected " + result);
+    public void modifyStudentHibernate(int id, String nome, String cognome) {
+        logger.info("modify one student " + nome + ", " + cognome);
 
     }
 
     @Override
-    public Studente deleteById(int id){
+    public Studente deleteById(int id) {
         logger.info("Deleting...");
-        String temp = "DELETE FROM Studente WHERE id = "+ id;
+        String temp = "DELETE FROM Studente WHERE id = " + id;
         Query query = sessionFactory.getCurrentSession().createQuery(temp);
         logger.info(query);
         query.executeUpdate();
         return null;
     }
 
+    @Override
+    public void insertHibernate(String firstname, String lastname) {
+        logger.info("Inserting...");
+        Studente S = new Studente(firstname, lastname);
+        sessionFactory.getCurrentSession().persist(S);
+    }
+
+
+    @Override
+    public void updateRecord(Studente studente) {
+    sessionFactory.getCurrentSession().update(studente);
+    }
 }

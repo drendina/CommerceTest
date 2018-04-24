@@ -55,6 +55,7 @@ form{
         text-align: right;
         background-color: #c1eeff;
     }
+
     #searchText{
         margin:15px;
         margin-right: 0;
@@ -71,11 +72,16 @@ form{
 
     /*-------------- BODY -------------*/
     #body1{
-        display:grid;
+        /*display:grid;*/
         padding-top: 58px;
-        grid-template-columns: 20% 60% 20%;
-        grid-template-rows: 20px 500px;
+        /*grid-template-columns: 20% 60% 20%;*/
+        /*grid-template-rows: 20px 250px;*/
+        padding-bottom: 30px;
     }
+    #showExams{
+        padding-top: 58px;
+    }
+
     #reset{
         cursor: pointer;
     }
@@ -90,14 +96,20 @@ form{
         padding-right: 30%;
         padding-top: 20px;
     }
+    /*.buttonCustom{*/
+        /*border-color: #000;*/
+        /*border-style: solid;*/
+        /*border-width: 2px;*/
+    /*}*/
 
 
 
     /*-------------- FOOTER -------------*/
     #footer{
 
-        position:fixed;
+        /*position:fixed;*/
         bottom:0;
+        height: 30px;
     }
 
     p#footerData{

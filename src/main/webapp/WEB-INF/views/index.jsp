@@ -33,8 +33,7 @@
         <div id = "resetButton">
             <button id = "reset" class = "reset ${showButton}" href = "/index/all">Reset filter</button>
         </div>
-        <div></div>
-        <div></div>
+        
         <div id="showData">
             <table>
                 <tr>
@@ -55,19 +54,29 @@
                     </tr>
                 </c:forEach>
             </table>
-            <td><a href="/index/insert">Insert new student</a></td>
+            
         </div>
+        
+        <form:form method="GET" action="/index/">
+            <input type="submit" value="Return to home">
+        </form:form>
+       
     </div>
-
-
-
-
+    
+    <div>
+        <form:form method="GET" action="/index/insert">
+            <p>First name:</p><input type="text" name="firstname" value="">
+            <p>Last name:</p><input type="text" name="lastname" value="">
+            <input type="submit" value="Submit">
+        </form:form>
+    </div>
+    
+    
     <div id="footer">
-        <p id="footerData">Daniele Rendina - Sopra Steria</p>
+        <p id="footerData">Daniele Rendina</p>
         <!--
         <a href="/index/all"> <img border="0" alt="Return to Top" src="img/arrow-top.png" width="48" height="48"> </a>
         -->
-
     </div>
 
     </body>

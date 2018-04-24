@@ -21,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public List<Studente> passingDataForQuery(){
+    public List passingDataForQuery(){
         return studenteDAO.getAllStudentsHibernate();
     }
     @Override
@@ -32,15 +32,15 @@ public class StudentServiceImpl implements StudentService {
     }
     @Override
     @Transactional
-    public List<Studente> passingDataForQuery(String data){
+    public List passingDataForQuery(String data){
        return studenteDAO.getStudenteStringHibernate(data);
     }
 
     @Override
     @Transactional
-    public void modifyStudent(int id, String nome, String cognome){
-        logger.info("hi, i'm the service and i'm trying to modify one student " + nome + ", " + cognome);
-        studenteDAO.modifyStudentHibernate(id, nome, cognome);
+    public void modifyStudent(Studente studente){
+        logger.info("hi, i'm the service and i'm trying to modify one student" + studente);
+        studenteDAO.updateRecord(studente);
     }
     @Override
     @Transactional
@@ -48,4 +48,12 @@ public class StudentServiceImpl implements StudentService {
         logger.info("deleting student with id: "+id);
         return studenteDAO.deleteById(id);
     }
+
+    @Override
+    @Transactional
+    public void insertNewStudent(String firstname, String lastname){
+        studenteDAO.insertHibernate(firstname, lastname);
+    }
+
+
 }
