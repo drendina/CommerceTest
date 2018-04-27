@@ -48,10 +48,11 @@ public class Studente implements Serializable {
     public String getLastname() {
         return lastname;
     }
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
@@ -62,10 +63,8 @@ public class Studente implements Serializable {
 
     @Override
     public String toString() {
-        return "Studente{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
+        return firstname + " " + lastname;
     }
+
+
 }

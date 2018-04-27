@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface StudentService {
 
-    List passingDataForQuery();
-    Studente passingDataForQuery(int data);
-    List passingDataForQuery(String data);
-   void modifyStudent(Studente studente);
-   Studente passingIdForDelete(int id);
-   void insertNewStudent(String firstname, String lastname);
+    List getAllStudents();
+    Studente getStudentById(int data);
+    List filterByName(String data);
+   void updateStudent(Studente studente);
+   void deleteStudent(Studente studente);
+   void insertStudent(Studente studente);
 
 }

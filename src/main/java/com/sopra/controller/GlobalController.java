@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 public class GlobalController {
 
     private static final Logger logger = Logger.getLogger(GlobalController.class);
-    private ModelAndView mv = new ModelAndView("trueIndex");
+    private ModelAndView mv = new ModelAndView("index");
 
     @RequestMapping(value = "/")
     private ModelAndView homePage(){

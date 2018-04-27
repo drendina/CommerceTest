@@ -3,11 +3,12 @@ package com.sopra.model;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Repository
 @Entity
 @Table(name = "esami")
-public class Materia {
+public class Materia implements Serializable {
     @Id
     @Column(name = "idEsame")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,9 +41,6 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "Esame{" +
-                "idEsame=" + idEsame +
-                ", nomeEsame='" + nomeEsame + '\'' +
-                '}';
+        return nomeEsame;
     }
 }

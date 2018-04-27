@@ -3,7 +3,6 @@ package com.sopra.dao.impl;
 import com.sopra.dao.StudenteDAO;
 import com.sopra.model.Studente;
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,50 +19,54 @@ public class StudenteDAOimpl implements StudenteDAO {
     private SessionFactory sessionFactory;
     private static final Logger logger = Logger.getLogger(StudenteDAOimpl.class);
 
+    //CREATE
     @Override
-    public List getAllStudentsHibernate() {
-        return sessionFactory.getCurrentSession().createQuery("FROM Studente").list();
+    public void insertStudent(Studente studente) {
+        logger.info("Inserting student " + studente);
+        sessionFactory.getCurrentSession()
+                .persist(studente);
     }
 
+    //READ
     @Override
-    public Studente getStudenteIdHibernate(int id) {
+    public List getAllStudents() {
+        logger.info("Get all students");
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Studente")
+                .list();
+    }
+
+    //UPDATE
+    @Override
+    public void updateStudent(Studente studente) {
+        logger.info("Updating student " + studente);
+        sessionFactory.getCurrentSession()
+                .update(studente);
+    }
+
+    //DELETE
+    @Override
+    public void deleteStudent(Studente studente) {
+        logger.info("Deleting student " + studente);
+        sessionFactory.getCurrentSession()
+                .delete(studente);
+    }
+
+    //SEARCH BY ID
+    @Override
+    public Studente getStudentById(int id) {
         logger.info(sessionFactory.getCurrentSession());
-        return (Studente) sessionFactory.getCurrentSession().get(Studente.class, id);
+        return (Studente) sessionFactory.getCurrentSession()
+                .get(Studente.class, id);
     }
 
+    //FILTER BY NAME
     @Override
-    public List getStudenteStringHibernate(String name) {
-        logger.info("get studente with name");
-        return sessionFactory.getCurrentSession().createQuery
-                ("FROM Studente S WHERE S.firstname = :studente_name").setParameter("studente_name", name).list();
-
-    }
-
-    public void modifyStudentHibernate(int id, String nome, String cognome) {
-        logger.info("modify one student " + nome + ", " + cognome);
-
-    }
-
-    @Override
-    public Studente deleteById(int id) {
-        logger.info("Deleting...");
-        String temp = "DELETE FROM Studente WHERE id = " + id;
-        Query query = sessionFactory.getCurrentSession().createQuery(temp);
-        logger.info(query);
-        query.executeUpdate();
-        return null;
-    }
-
-    @Override
-    public void insertHibernate(String firstname, String lastname) {
-        logger.info("Inserting...");
-        Studente S = new Studente(firstname, lastname);
-        sessionFactory.getCurrentSession().persist(S);
-    }
-
-
-    @Override
-    public void updateRecord(Studente studente) {
-    sessionFactory.getCurrentSession().update(studente);
+    public List filterByName(String name) {
+        logger.info("Get students by name");
+        return sessionFactory.getCurrentSession()
+                .createQuery("FROM Studente S WHERE S.firstname = :studente_name")
+                .setParameter("studente_name", name)
+                .list();
     }
 }

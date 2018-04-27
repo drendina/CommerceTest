@@ -19,41 +19,49 @@ public class StudentServiceImpl implements StudentService {
     private StudenteDAO studenteDAO;
     private static final Logger logger = Logger.getLogger(StudentServiceImpl.class);
 
+    //CREATE
     @Override
     @Transactional
-    public List passingDataForQuery(){
-        return studenteDAO.getAllStudentsHibernate();
-    }
-    @Override
-    @Transactional
-    public Studente passingDataForQuery(int data){
-        logger.info("passing data for query (ID)");
-        return studenteDAO.getStudenteIdHibernate(data);
-    }
-    @Override
-    @Transactional
-    public List passingDataForQuery(String data){
-       return studenteDAO.getStudenteStringHibernate(data);
+    public void insertStudent(Studente studente){
+        logger.info("Inserting student " + studente);
+        studenteDAO.insertStudent(studente);
     }
 
+    //READ
     @Override
     @Transactional
-    public void modifyStudent(Studente studente){
-        logger.info("hi, i'm the service and i'm trying to modify one student" + studente);
-        studenteDAO.updateRecord(studente);
+    public List getAllStudents(){
+        logger.info("Get all students");
+        return studenteDAO.getAllStudents();
     }
+
+    //UPDATE
     @Override
     @Transactional
-    public Studente passingIdForDelete(int id){
-        logger.info("deleting student with id: "+id);
-        return studenteDAO.deleteById(id);
+    public void updateStudent(Studente studente){
+        logger.info("Updating student " + studente);
+        studenteDAO.updateStudent(studente);
     }
 
+    //DELETE
     @Override
     @Transactional
-    public void insertNewStudent(String firstname, String lastname){
-        studenteDAO.insertHibernate(firstname, lastname);
+    public void deleteStudent(Studente studente){
+        logger.info("Deleting student " + studente);
+        studenteDAO.deleteStudent(studente);
     }
 
+    //SEARCH BY ID
+    @Override
+    @Transactional
+    public Studente getStudentById(int data){
+        return studenteDAO.getStudentById(data);
+    }
 
+    //FILTER BY NAME
+    @Override
+    @Transactional
+    public List filterByName(String data){
+        return studenteDAO.filterByName(data);
+    }
 }

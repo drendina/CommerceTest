@@ -12,9 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.sopra.utils.Endpoints.MATTER_BASEPATH;
+
 @Controller
 @Transactional
-@RequestMapping(value = "/index")
+@RequestMapping(value = MATTER_BASEPATH)
 public class MatterController {
 
     private static final Logger logger = Logger.getLogger(MatterController.class);
@@ -23,7 +25,7 @@ public class MatterController {
     private MatterService matterService;
 
     //view
-    private ModelAndView matterMv = new ModelAndView("matterView");
+    private ModelAndView matterMv = new ModelAndView("matterIndex");
 
     //Create
     @RequestMapping(method = RequestMethod.GET, value = "/insertMatter")
@@ -40,6 +42,7 @@ public class MatterController {
         List test = matterService.getMatterList();
         logger.info(test);
         matterMv.addObject("matterList", matterService.getMatterList());
+        matterMv.addObject("matter_basepath", MATTER_BASEPATH);
         return matterMv;
     }
 

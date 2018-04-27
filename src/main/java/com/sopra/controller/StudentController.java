@@ -1,12 +1,14 @@
 package com.sopra.controller;
 
+import com.sopra.model.EsameSostenuto;
 import com.sopra.model.Studente;
+import com.sopra.service.ExamService;
+import com.sopra.service.MatterService;
 import com.sopra.service.StudentService;
+import com.sopra.utils.Endpoints;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,82 +17,102 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.transaction.Transactional;
 
+import static com.sopra.utils.Endpoints.*;
+
 
 @Controller
 @Transactional
-@RequestMapping(value = "/index")
+@RequestMapping(value = STUDENT_BASEPATH)
 public class StudentController {
 
     private static final Logger logger = Logger.getLogger(StudentController.class);
-    private ModelAndView mv = new ModelAndView("index");
+    private ModelAndView mv = new ModelAndView("studentIndex");
+    private ModelAndView bio = new ModelAndView("studentBio");
 
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    private ExamService examService;
 
+    @Autowired
+    private MatterService matterService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public ModelAndView getPage() {
-        logger.info(studentService.passingDataForQuery());
-        mv.addObject("lista", studentService.passingDataForQuery());
-        mv.addObject("filtered", false);
-        return mv;
-    }
-
-    @RequestMapping(value = "/index")
-    public ModelAndView getHomePage(){
-        return mv;
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/delete")
-    public ModelAndView getpage(@RequestParam int id) {
-        mv.addObject("lista", studentService.passingIdForDelete(id));
-        return getPage();
-    }
-
+    //CREATE
     @RequestMapping(method = RequestMethod.GET, value = "/insert")
-    public ModelAndView insertIntoDB(@RequestParam String firstname, String lastname ) {
-        logger.info("insert");
-        studentService.insertNewStudent(firstname, lastname);
-        mv.addObject("lista", studentService.passingDataForQuery());
+    public ModelAndView insertStudent(@ModelAttribute("studente") Studente studente) {
+        logger.info("Insert student " + studente);
+        studentService.insertStudent(studente);
+        return showAllStudents();
+    }
+
+    //READ
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    public ModelAndView showAllStudents() {
+        logger.info("Get all students");
+        mv.addObject("lista", studentService.getAllStudents());
+        mv.addObject("student_basepath", STUDENT_BASEPATH);
         return mv;
     }
 
-
-    @RequestMapping(method = RequestMethod.GET, value = "/filter")
-    public ModelAndView getPage(@RequestParam String name) {
-        mv.addObject("lista", studentService.passingDataForQuery(name));
-        mv.addObject("filtered", true);
-        return mv;
-    }
-
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/modify")
-    public ModelAndView showForm(@RequestParam int id) {
-        Studente studente = studentService.passingDataForQuery(id);
-        logger.info(studente);
-
-        return new ModelAndView("studentView", "studente", studente);
-    }
-
-
+    //UPDATE
     @RequestMapping(method = RequestMethod.POST, value = "/updateStudent")
-    public String updateStudent (@ModelAttribute("studente") Studente studente, BindingResult result, ModelMap model) {
-//        if (result.hasErrors()) { return "error"; }
-//        model.addAttribute("firstname", studente.getFirstname());
-//        model.addAttribute("lastname", studente.getLastname());
-//        model.addAttribute("id", studente.getId());
-        studentService.modifyStudent(studente);
-        logger.info(studente);
-        return "studentView";
+    public ModelAndView updateStudent (@ModelAttribute("studente") Studente studente) {
+        logger.info("Update student: " + studente);
+        studentService.updateStudent(studente);
+        return showAllStudents();
+    }
+
+    //DELETE
+    @RequestMapping(method = RequestMethod.GET, value = "/delete")
+    public ModelAndView deleteStudent(@RequestParam int id) {
+
+        Studente studente = studentService.getStudentById(id);
+        logger.info("Delete student: " + studente);
+        studentService.deleteStudent(studente);
+        return showAllStudents();
+    }
+
+    //FILTER BY NAME
+    @RequestMapping(method = RequestMethod.GET, value = "/filter")
+    public ModelAndView filterByName(@RequestParam String name) {
+        mv.addObject("lista", studentService.filterByName(name));
+        return mv;
+    }
+
+    //CALL FORM VIEW TO MODIFY SELECTED STUDENT
+    @RequestMapping(method = RequestMethod.GET, value = "/modify")
+    public ModelAndView showModForm(@RequestParam int id) {
+        Studente studente = studentService.getStudentById(id);
+        logger.info("student: " + studente);
+
+        ModelAndView mv = new ModelAndView("modify");
+        mv.addObject("studente", studente);
+        mv.addObject("action", STUDENT_BASEPATH.concat("/updateStudent"));
+
+        return mv;
+    }
+
+    //BIO VIEW
+    @RequestMapping(method = RequestMethod.GET, value = "/studentBio")
+    public ModelAndView showStudentBio(@RequestParam int id){
+        bio.addObject("studente", studentService.getStudentById(id));
+        bio.addObject("listaEsami",examService.showAllExamsByStudentId(id));
+        bio.addObject("student_basepath", STUDENT_BASEPATH);
+        bio.addObject("listaMaterie", matterService.getMatterList());
+        bio.addObject("esame", new EsameSostenuto(id));
+        return bio;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/studentBio")
+    public ModelAndView insertExam (@ModelAttribute("esame") EsameSostenuto esameSostenuto){
+        logger.info(esameSostenuto);
+        examService.insertExam(esameSostenuto);
+        return bio;
     }
 
 
 
 }
-
-
-
 
 

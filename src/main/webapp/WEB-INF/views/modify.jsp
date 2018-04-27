@@ -1,16 +1,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
     <title>Title</title>
 </head>
     <body>
-    <form:form method="POST" action="/index/updateStudent" modelAttribute="studente">
+    <form:form method="POST" action="${action}" modelAttribute="studente">
         <h1>modify student</h1>
         <table>
             <tr>
                 <td><form:label path="id">Id</form:label></td>
-                <td><form:textarea path="id" rows="1" readonly="true"/></td>
+                <td><form:hidden path="id"/>${studente.id}</td>
             </tr>
             <tr>
                 <td><form:label path="firstname">Firstame</form:label></td>
