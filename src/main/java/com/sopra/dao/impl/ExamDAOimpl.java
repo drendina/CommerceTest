@@ -18,11 +18,6 @@ public class ExamDAOimpl implements ExamDAO {
     private static final Logger logger =
             Logger.getLogger(ExamDAOimpl.class);
 
-    @Override
-    public List getExamById (int id){
-        //TODO
-        return null;
-    }
 
     @Override
     public List filterByName(String name){
@@ -43,11 +38,25 @@ public class ExamDAOimpl implements ExamDAO {
                 .persist(esameSostenuto);
     }
 
+    // DELETE
+    @Override
+    public void deleteExam(EsameSostenuto esameSostenuto){
+        sessionFactory.getCurrentSession().delete(esameSostenuto);
+    }
+
     //FILTER BY ID
+    @Override
     public List showAllExamsByStudentId(int id){
         return sessionFactory.getCurrentSession()
                 .createQuery("FROM EsameSostenuto ES WHERE ES.idStudente = :id_studente")
                 .setParameter("id_studente", id)
                 .list();
+    }
+
+    @Override
+    public EsameSostenuto getEsameById(int id){
+        logger.info("get esame by id :" + id);
+        return (EsameSostenuto) sessionFactory.getCurrentSession()
+                .get(EsameSostenuto.class, id);
     }
 }

@@ -9,4 +9,6 @@ public interface ExamService {
     List showAllExams();
     void insertExam(EsameSostenuto esameSostenuto);
     List showAllExamsByStudentId(int id);
+    EsameSostenuto getEsameById(int id);
+    void deleteExam(EsameSostenuto esame);
 }

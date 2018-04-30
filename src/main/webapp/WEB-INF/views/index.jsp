@@ -24,8 +24,7 @@
                 <input type="submit" value="Gestione Esami Effettuati">
             </form:form>
         </div>
-        
 
+        <script type="text/javascript" src="/risorse/js/home.js"/>
     </body>
-
 </html>

@@ -1,23 +1,25 @@
 package com.sopra.controller;
 
+import com.sopra.form.StudenteForm;
 import com.sopra.model.EsameSostenuto;
 import com.sopra.model.Studente;
 import com.sopra.service.ExamService;
 import com.sopra.service.MatterService;
 import com.sopra.service.StudentService;
-import com.sopra.utils.Endpoints;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
-import static com.sopra.utils.Endpoints.*;
+import java.util.List;
+
+import static com.sopra.utils.Endpoints.EXAM_BASEPATH;
+import static com.sopra.utils.Endpoints.STUDENT_BASEPATH;
 
 
 @Controller
@@ -55,12 +57,28 @@ public class StudentController {
         return mv;
     }
 
+    @RequestMapping(value="/all.json")
+    public @ResponseBody List<Studente> getAllStudentsJson(){
+        return studentService.getAllStudents();
+    }
+
+
     //UPDATE
     @RequestMapping(method = RequestMethod.POST, value = "/updateStudent")
-    public ModelAndView updateStudent (@ModelAttribute("studente") Studente studente) {
-        logger.info("Update student: " + studente);
-        studentService.updateStudent(studente);
-        return showAllStudents();
+    public ModelAndView updateStudent (@Valid @ModelAttribute("studenteForm") StudenteForm studenteForm,
+                                       BindingResult bindingResult) {
+        logger.info("Update student: " + studenteForm);
+        if(bindingResult.hasErrors()){
+
+            return new ModelAndView("modify", "studenteForm", studenteForm);
+        }
+        else{
+            Studente studenteTemp = new Studente(studenteForm.getFirstname(), studenteForm.getLastname());
+            studentService.updateStudent(studenteTemp);
+            return showAllStudents();
+
+        }
+
     }
 
     //DELETE
@@ -85,9 +103,9 @@ public class StudentController {
     public ModelAndView showModForm(@RequestParam int id) {
         Studente studente = studentService.getStudentById(id);
         logger.info("student: " + studente);
-
         ModelAndView mv = new ModelAndView("modify");
-        mv.addObject("studente", studente);
+
+        mv.addObject("studenteForm", studente);
         mv.addObject("action", STUDENT_BASEPATH.concat("/updateStudent"));
 
         return mv;
@@ -101,6 +119,7 @@ public class StudentController {
         bio.addObject("student_basepath", STUDENT_BASEPATH);
         bio.addObject("listaMaterie", matterService.getMatterList());
         bio.addObject("esame", new EsameSostenuto(id));
+        bio.addObject("exam_basepath",EXAM_BASEPATH);
         return bio;
     }
 

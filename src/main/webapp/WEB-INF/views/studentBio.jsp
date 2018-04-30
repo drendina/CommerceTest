@@ -29,14 +29,14 @@
                     ${exams.idEsame}
                     ${exams.data}
                     ${exams.voto}
+                    <a href="${exam_basepath}/delete?id=${exams.idEsameSostenuto}&idStud=${studente.id}">Delete</a>
                 </c:forEach>
             <br>
             <c:set var="idStudente" value="${stud.id}"/>
             
                 Aggiungi Esame al libretto
-            <form:form method="POST" action="${student_basepath}/studentBio" modelAttribute = "esame" >
+            <form:form method="POST" action="${student_basepath}/studentBio" modelAttribute="esame" >
                 <table>
-                    <%--<c:set var="idStudente" value="${stud.id}"/>--%>
                     <tr>
                         <td><form:hidden path="idStudente"/></td>
                     </tr>

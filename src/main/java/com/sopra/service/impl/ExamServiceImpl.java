@@ -41,11 +41,23 @@ public class ExamServiceImpl implements ExamService {
     //UPDATE
 
     //DELETE
-
-    //FILTER BY ID
     @Override
+    @Transactional
+    public void deleteExam(EsameSostenuto esame){
+        examDAO.deleteExam(esame);
+    }
+
+    //FILTER ALL EXAM BY ID STUDENTE
+    @Override
+    @Transactional
     public List showAllExamsByStudentId(int id){
         return examDAO.showAllExamsByStudentId(id);
     }
 
+    //FILTER ONE EXAM BY ID
+    @Override
+
+    public EsameSostenuto getEsameById(int id) {
+        logger.info("get esame by id :" + id);
+        return examDAO.getEsameById(id);}
 }

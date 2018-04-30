@@ -47,8 +47,6 @@
                         <td><a href="${student_basepath}/modify?id=${student.id}">Modify</a></td>
                         <td><a href="${student_basepath}/delete?id=${student.id}">Delete</a></td>
                         <td><a href="${student_basepath}/studentBio?id=${student.id}">Bio</a></td>
-
-                    <%--<td><button id="modify" onclick="window.location=/index/modify?id=${student.id}")>Modify</button></td>--%>
                         
                     </tr>
                 </c:forEach>
@@ -72,9 +70,6 @@
     
     <div id="footer">
         <p id="footerData">Daniele Rendina</p>
-        <!--
-        <a href="/index/all"> <img border="0" alt="Return to Top" src="img/arrow-top.png" width="48" height="48"> </a>
-        -->
     </div>
 
     </body>
