@@ -58,9 +58,11 @@ public class StudentController {
     }
 
     @RequestMapping(value="/all.json")
-    public @ResponseBody List<Studente> getAllStudentsJson(){
+    public @ResponseBody List getAllStudentsJson(){
         return studentService.getAllStudents();
     }
+
+    @RequestMapping(value = )
 
 
     //UPDATE

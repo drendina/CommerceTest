@@ -160,6 +160,13 @@
           <version>5.4.1.Final</version>
       </dependency>
 
+      <!-- JAVASCRIPT AND JQUERY-->
+      <dependency>
+          <groupId>org.webjars.bower</groupId>
+          <artifactId>jquery</artifactId>
+          <version>3.3.1</version>
+      </dependency>
+
 
       <!-- OTHER -->
       <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
@@ -217,15 +224,6 @@
           <artifactId>jackson-mapper-asl</artifactId>
           <version>1.9.13</version>
       </dependency>
-
-
-
-
-
-
-
-
-
   </dependencies>
 
   <build>

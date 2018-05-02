@@ -95,6 +95,10 @@ form{
         padding-top: 20px;
     }
 
+    .hide{
+        display: none;
+    }
+
 
     /*-------------- FOOTER -------------*/
     #footer{
