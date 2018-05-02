@@ -10,16 +10,16 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import java.util.List;
-
-import static com.sopra.utils.Endpoints.EXAM_BASEPATH;
-import static com.sopra.utils.Endpoints.STUDENT_BASEPATH;
+import static com.sopra.utils.Endpoints.*;
 
 
 @Controller
@@ -54,16 +54,9 @@ public class StudentController {
         logger.info("Get all students");
         mv.addObject("lista", studentService.getAllStudents());
         mv.addObject("student_basepath", STUDENT_BASEPATH);
+        mv.addObject("ajax_students_basepath", AJAX_STUDENTS_BASEPATH);
         return mv;
     }
-
-    @RequestMapping(value="/all.json")
-    public @ResponseBody List getAllStudentsJson(){
-        return studentService.getAllStudents();
-    }
-
-    @RequestMapping(value = )
-
 
     //UPDATE
     @RequestMapping(method = RequestMethod.POST, value = "/updateStudent")

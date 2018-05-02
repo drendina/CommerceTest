@@ -160,12 +160,21 @@
           <version>5.4.1.Final</version>
       </dependency>
 
-      <!-- JAVASCRIPT AND JQUERY-->
+      <!-- JQUERY-->
       <dependency>
           <groupId>org.webjars.bower</groupId>
           <artifactId>jquery</artifactId>
           <version>3.3.1</version>
       </dependency>
+
+      <!--MUSTACHE -->
+      <dependency>
+          <groupId>com.github.spullara.mustache.java</groupId>
+          <artifactId>compiler</artifactId>
+          <version>0.9.5</version>
+      </dependency>
+
+
 
 
       <!-- OTHER -->
