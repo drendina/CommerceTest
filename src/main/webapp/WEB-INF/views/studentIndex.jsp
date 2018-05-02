@@ -43,10 +43,7 @@
                 <input type="submit" value="Return to home">
             </form:form>
     
-            <input type="submit" value="richiedi dati" class="ajax-button">
-            <button class="ajax-button">
-                <div> Chiamata Ajax </div>
-            </button>
+            <input type="submit" value="Chiamata Ajax " class="ajax-button">
             
             <div class="risposta"></div>
             
