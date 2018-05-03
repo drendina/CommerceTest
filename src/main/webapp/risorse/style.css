@@ -8,7 +8,8 @@ form{
 /* end reset Chrome default setting*/
 
 /* DESKTOP SETTINGS*/
-@media (min-width: 1024px) {
+/*@media (min-width: 1024px) {*/
+    @media (min-width: 800px) {
     body{
         background-color: #9bcaff
     }
@@ -112,7 +113,8 @@ form{
 }
 
 /* MOBILE SETTINGS*/
-@media (max-width: 1023px) {
+/*@media (max-width: 1023px) {*/
+    @media (max-width: 799px) {
     body{
         background-color: #00a4ff;
     }

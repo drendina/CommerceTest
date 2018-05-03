@@ -18,7 +18,7 @@
             <tr>
                 <td><form:label path="lastname">Lastname</form:label></td>
                 <td><form:input path="lastname"/></td>
-                <td><form:errors path="lastname">Wrong lastname, retry</form:errors></td>
+                <td><form:errors path="lastname"></form:errors></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Submit"/></td>

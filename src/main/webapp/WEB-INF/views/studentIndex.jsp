@@ -5,6 +5,7 @@
     <head>
         <title>HomePage</title>
         <link href="<c:url value="/risorse/style.css" />" rel="stylesheet">
+        
     </head>
 
    
@@ -35,39 +36,43 @@
                 <form:form method="GET" action="${student_basepath}/insert">
                     <p>Nome:<input type="text" name="firstname" value=""></p>
                     <p>Cognome:<input type="text" name="lastname" value=""></p>
-                    <input type="submit" value="Submit">
+                    <input type="submit" value="Submit" class="ajax-button">
                 </form:form>
             </div>
-        
+
             <form:form method="GET" action="/index/">
                 <input type="submit" value="Return to home">
             </form:form>
     
-            <input type="submit" value="Chiamata Ajax " class="ajax-button">
-            
-            <div class="risposta"></div>
-            
-            
-            <div id="showData">
-                <table>
-                    <tr>
-                        <td>Id</td>
-                        <td>Nome</td>
-                        <td>Cognome</td>
-                    </tr>
-                    <c:forEach items="${lista}" var="student">
-                        <tr>
-                            <td> ${student.id} </td>
-                            <td> ${student.firstname} </td>
-                            <td> ${student.lastname} </td>
-                            <td><a href="${student_basepath}/modify?id=${student.id}">Modify</a></td>
-                            <td><a href="${student_basepath}/delete?id=${student.id}">Delete</a></td>
-                            <td><a href="${student_basepath}/studentBio?id=${student.id}">Bio</a></td>
-                        </tr>
-                    </c:forEach>
-                </table>
+            <input type="submit" value="Lista degli studenti" class="ajax-button">
                 
-            </div>
+                <table id="target"></table>
+            
+            
+            <script id="template" type="x-tmpl-mustache">
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{firstname}}</td>
+                    <td>{{lastname}}</td>
+                    <td><a href="${student_basepath}/modify?id={{id}}">Modify</a></td>
+                    <td><a href="${student_basepath}/delete?id={{id}}">Delete</a></td>
+                    <td><a href="${student_basepath}/studentBio?id={{id}}">Bio</a></td>
+                </tr>
+            </script>
+            
+                <table id="showData">
+                        <c:forEach items="${lista}" var="student">
+                            <tr>
+                                <td> ${student.id} </td>
+                                <td> ${student.firstname} </td>
+                                <td> ${student.lastname} </td>
+                                <td><a href="${student_basepath}/modify?id=${student.id}">Modify</a></td>
+                                <td><a href="${student_basepath}/delete?id=${student.id}">Delete</a></td>
+                                <td><a href="${student_basepath}/studentBio?id=${student.id}">Bio</a></td>
+                            </tr>
+                        </c:forEach>
+                    
+                </table>
         </div>
 
 
@@ -75,11 +80,12 @@
          <div id="footer">
              <p id="footerData">Daniele Rendina</p>
          </div>
+         
          <script src="https://code.jquery.com/jquery-3.2.1.min.js"
                  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-                 crossorigin="anonymous">
-         </script>
-         <script type="text/javascript" src="/risorse/js/studentIndex.js"></script>
-         <script type="text/javascript" src="/risorse/js/mustache.js" ></script>
+                 crossorigin="anonymous"></script>
+        <script src="/risorse/node_modules/mustache/mustache.js"></script>
+        <script type="text/javascript" src="/risorse/js/studentIndex.js"></script>
+        
      </body>
  </html>

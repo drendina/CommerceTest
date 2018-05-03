@@ -45,7 +45,7 @@ public class StudentController {
     public ModelAndView insertStudent(@ModelAttribute("studente") Studente studente) {
         logger.info("Insert student " + studente);
         studentService.insertStudent(studente);
-        return showAllStudents();
+        return mv;
     }
 
     //READ
