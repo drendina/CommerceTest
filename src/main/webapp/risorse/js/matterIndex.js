@@ -1,7 +1,7 @@
 $(document).ready(function(){
     loadPage();
 // TODO fix
-    $('#buttonSub').on('click', checkForm());
+    $('#buttonSub').on('click', checkForm);
 
 });
 
