@@ -17,7 +17,7 @@
             </form:form>
             
             <form:form method="GET" action="/matters/matterView">
-                <input type="submit" value="Gestione Materie d'Esame">
+                <input id="GMDE" type="submit" value="Gestione Materie d'Esame">
             </form:form>
     
             <form:form method="GET" action="/exams/examIndex">

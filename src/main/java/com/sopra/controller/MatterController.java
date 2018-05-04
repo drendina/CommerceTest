@@ -28,11 +28,11 @@ public class MatterController {
     private ModelAndView matterMv = new ModelAndView("matterIndex");
 
     //Create
-    @RequestMapping(method = RequestMethod.GET, value = "/insertMatter")
+    @RequestMapping(method = RequestMethod.POST, value = "/insertMatter")
     public ModelAndView insertMatter (@RequestParam String matterName) {
         logger.info("insert matter " + matterName);
         matterService.insertMatter(matterName);
-        return showMatter();
+        return matterMv;
     }
 
     //Read

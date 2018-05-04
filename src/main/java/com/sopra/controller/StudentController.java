@@ -1,5 +1,6 @@
 package com.sopra.controller;
 
+import com.sopra.form.EsameSostenutoForm;
 import com.sopra.form.StudenteForm;
 import com.sopra.model.EsameSostenuto;
 import com.sopra.model.Studente;
@@ -41,18 +42,24 @@ public class StudentController {
     private MatterService matterService;
 
     //CREATE
-    @RequestMapping(method = RequestMethod.GET, value = "/insert")
-    public ModelAndView insertStudent(@ModelAttribute("studente") Studente studente) {
-        logger.info("Insert student " + studente);
-        studentService.insertStudent(studente);
-        return mv;
+    @RequestMapping(method = RequestMethod.POST, value = "/insert")
+    public ModelAndView insertStudent(@Valid @ModelAttribute("studenteForm") StudenteForm studenteForm,
+                                        BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return new ModelAndView("studentIndex", "studenteForm", studenteForm);
+        }else
+        {
+            Studente studente = new Studente(studenteForm.getFirstname(), studenteForm.getLastname());
+            logger.info("Insert student " + studente);
+            studentService.insertStudent(studente);
+            return mv;}
     }
 
     //READ
     @RequestMapping(method = RequestMethod.GET, value = "/all")
     public ModelAndView showAllStudents() {
-        logger.info("Get all students");
-        mv.addObject("lista", studentService.getAllStudents());
+        logger.info("Deploying student index");
+//        mv.addObject("lista", studentService.getAllStudents());
         mv.addObject("student_basepath", STUDENT_BASEPATH);
         mv.addObject("ajax_students_basepath", AJAX_STUDENTS_BASEPATH);
         return mv;
@@ -68,13 +75,34 @@ public class StudentController {
             return new ModelAndView("modify", "studenteForm", studenteForm);
         }
         else{
-            Studente studenteTemp = new Studente(studenteForm.getFirstname(), studenteForm.getLastname());
+            Studente studenteTemp = new Studente(studenteForm.getId(), studenteForm.getFirstname(), studenteForm.getLastname());
             studentService.updateStudent(studenteTemp);
             return showAllStudents();
 
         }
 
     }
+
+    //TODO fix catching error
+    @RequestMapping(method = RequestMethod.POST, value = "/studentBio")
+    public ModelAndView insertExam (@Valid @ModelAttribute("esame") EsameSostenutoForm esameSostenutoForm,
+                                    BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return new ModelAndView("studentBio", "esameSostenutoForm", esameSostenutoForm);
+        }
+        else{
+            logger.info(esameSostenutoForm);
+            EsameSostenuto esameSostenutoTemp = new EsameSostenuto
+                    (       esameSostenutoForm.getIdEsame(),
+                            esameSostenutoForm.getIdStudente(),
+                            esameSostenutoForm.getData(),
+                            esameSostenutoForm.getVoto());
+            examService.insertExam(esameSostenutoTemp);
+            return bio;
+        }
+    }
+
+
 
     //DELETE
     @RequestMapping(method = RequestMethod.GET, value = "/delete")
@@ -83,7 +111,7 @@ public class StudentController {
         Studente studente = studentService.getStudentById(id);
         logger.info("Delete student: " + studente);
         studentService.deleteStudent(studente);
-        return showAllStudents();
+        return mv;
     }
 
     //FILTER BY NAME
@@ -108,7 +136,7 @@ public class StudentController {
 
     //BIO VIEW
     @RequestMapping(method = RequestMethod.GET, value = "/studentBio")
-    public ModelAndView showStudentBio(@RequestParam int id){
+    public ModelAndView showStudentBio(@RequestParam int id ){
         bio.addObject("studente", studentService.getStudentById(id));
         bio.addObject("listaEsami",examService.showAllExamsByStudentId(id));
         bio.addObject("student_basepath", STUDENT_BASEPATH);
@@ -118,12 +146,9 @@ public class StudentController {
         return bio;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/studentBio")
-    public ModelAndView insertExam (@ModelAttribute("esame") EsameSostenuto esameSostenuto){
-        logger.info(esameSostenuto);
-        examService.insertExam(esameSostenuto);
-        return bio;
-    }
+
+
+
 
 
 

@@ -33,46 +33,31 @@
         <!-- ---------------- BODY ----------------------- -->
         <div id = "body1">
             <div class="login-form hide">
-                <form:form method="GET" action="${student_basepath}/insert">
+                <form:form name="myForm" method="POST" action="${student_basepath}/insert" onsubmit="return validateForm()" modelAttribute="studenteForm">
                     <p>Nome:<input type="text" name="firstname" value=""></p>
+                    <form:errors path="firstname"></form:errors>
                     <p>Cognome:<input type="text" name="lastname" value=""></p>
+                    <form:errors path="lastname"></form:errors>
                     <input type="submit" value="Submit" class="ajax-button">
                 </form:form>
             </div>
-
+            
             <form:form method="GET" action="/index/">
                 <input type="submit" value="Return to home">
             </form:form>
-    
-            <input type="submit" value="Lista degli studenti" class="ajax-button">
-                
-                <table id="target"></table>
-            
             
             <script id="template" type="x-tmpl-mustache">
-                <tr>
-                    <td>{{id}}</td>
-                    <td>{{firstname}}</td>
-                    <td>{{lastname}}</td>
-                    <td><a href="${student_basepath}/modify?id={{id}}">Modify</a></td>
-                    <td><a href="${student_basepath}/delete?id={{id}}">Delete</a></td>
-                    <td><a href="${student_basepath}/studentBio?id={{id}}">Bio</a></td>
-                </tr>
+                    <li>
+                        {{id}}
+                        {{firstname}}
+                        {{lastname}}
+                        <button><a href="${student_basepath}/modify?id={{id}}">Modify</a></button>
+                        <button><a href="${student_basepath}/delete?id={{id}}">Delete</a></button>
+                        <button><a href="${student_basepath}/studentBio?id={{id}}">Bio</a></button>
+                    </li>
             </script>
             
-                <table id="showData">
-                        <c:forEach items="${lista}" var="student">
-                            <tr>
-                                <td> ${student.id} </td>
-                                <td> ${student.firstname} </td>
-                                <td> ${student.lastname} </td>
-                                <td><a href="${student_basepath}/modify?id=${student.id}">Modify</a></td>
-                                <td><a href="${student_basepath}/delete?id=${student.id}">Delete</a></td>
-                                <td><a href="${student_basepath}/studentBio?id=${student.id}">Bio</a></td>
-                            </tr>
-                        </c:forEach>
-                    
-                </table>
+                <ul id="showData"></ul>
         </div>
 
 

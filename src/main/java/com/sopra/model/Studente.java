@@ -63,7 +63,7 @@ public class Studente implements Serializable {
 
     @Override
     public String toString() {
-        return firstname + " " + lastname;
+        return id + " "+ firstname + " " + lastname;
     }
 
 

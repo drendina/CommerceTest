@@ -99,6 +99,10 @@ form{
     .hide{
         display: none;
     }
+    #loadMore{
+        color: purple;
+        cursor:pointer;
+    }
 
 
     /*-------------- FOOTER -------------*/

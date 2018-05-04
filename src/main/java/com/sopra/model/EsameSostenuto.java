@@ -39,6 +39,13 @@ public class EsameSostenuto implements Serializable {
         this.idStudente = id;
     }
 
+    public EsameSostenuto(int idEsame, int idStudente, Date data, int voto) {
+        this.idEsame = idEsame;
+        this.idStudente = idStudente;
+        this.data = data;
+        this.voto = voto;
+    }
+
     public int getIdEsameSostenuto() {
         return idEsameSostenuto;
     }
