@@ -24,7 +24,7 @@
     </div>
     
     <div id = "body1" >
-        <div style="float:left; display:block; width:45%; margin: 20px; background-color:#b66dff;">
+        <div>
             
             <form:form method="POST" action="${exam_basepath}/insert" modelAttribute="esame">
                 <table>

@@ -57,6 +57,11 @@ form{
         background-color: #c1eeff;
     }
 
+    #language{
+        display:inline;
+        background-color: #c1eeff;
+    }
+
     #searchText{
         margin:15px;
         margin-right: 0;
