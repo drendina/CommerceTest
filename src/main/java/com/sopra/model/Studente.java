@@ -2,14 +2,27 @@ package com.sopra.model;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class Studente {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Repository
+@Entity
+@Table(name = "studenti")
+public class Studente implements Serializable {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "firstname")
     private String firstname;
 
+    @Column(name = "lastname")
     private String lastname;
+
+
+    //constructor
     public Studente(){
 
     }
@@ -19,13 +32,13 @@ public class Studente {
         this.firstname = firstname;
         this.lastname = lastname;
     }
+    public Studente(String firstname, String lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstname() {
@@ -34,6 +47,10 @@ public class Studente {
 
     public String getLastname() {
         return lastname;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setFirstname(String firstname) {
@@ -46,10 +63,8 @@ public class Studente {
 
     @Override
     public String toString() {
-        return "Studente{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                '}';
+        return id + " "+ firstname + " " + lastname;
     }
+
+
 }

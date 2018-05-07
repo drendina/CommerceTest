@@ -6,8 +6,11 @@ import java.util.List;
 
 public interface StudenteDAO {
 
-     List<Studente> selectAll();
-     Studente selectById(int id);
-     List<Studente> selectByFirstname(String nome);
-     List<Studente> getStudentList(String nome);
+     List getAllStudents();
+     Studente getStudentById(int id);
+     List filterByName(String name);
+     void deleteStudent(Studente studente);
+     void insertStudent(Studente studente);
+     void updateStudent(Studente studente);
+
 }

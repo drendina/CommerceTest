@@ -2,11 +2,15 @@ package com.sopra.service;
 
 import com.sopra.model.Studente;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public interface StudentService {
 
-    LinkedList<Studente> passingDataForQuery();
-    Studente passingDataForQuery(int data);
-    LinkedList<Studente> passingDataForQuery(String data);
+    List getAllStudents();
+    Studente getStudentById(int data);
+    List filterByName(String data);
+   void updateStudent(Studente studente);
+   void deleteStudent(Studente studente);
+   void insertStudent(Studente studente);
+
 }

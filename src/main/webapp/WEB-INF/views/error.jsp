@@ -6,7 +6,7 @@
 <h3>Please enter the correct details</h3>
 <table>
     <tr>
-        <td><a href="studentWiew">Retry</a></td>
+        <td><a href="/students/modify?=${id}">Retry</a></td>
     </tr>
 </table>
 </body>

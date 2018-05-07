@@ -1,0 +1,125 @@
+/* reset default settings Chrome*/
+body{
+    margin:0;
+}
+form{
+    margin:0;
+}
+/* end reset Chrome default setting*/
+
+/* DESKTOP SETTINGS*/
+/*@media (min-width: 1024px) {*/
+    @media (min-width: 800px) {
+    body{
+        background-color: #9bcaff
+    }
+
+    div{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    p{
+        margin: 0px;
+        height:24px;
+        margin: 15px;
+        text-align: left;
+        font-size: 24px;
+    }
+
+
+
+
+    /*-------------- HEADER -------------*/
+    #header{
+        display: grid;
+        position: fixed;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    #title{
+        background-color: #8592f5;
+
+    }
+    #databaseImage{
+        padding:3px;
+        display:inline;
+    }
+    #pageName{
+        font-style: italic;
+        height: 50px;
+        display:inline;
+        vertical-align: top;
+    }
+
+    #search{
+        text-align: right;
+        background-color: #c1eeff;
+    }
+
+    #searchText{
+        margin:15px;
+        margin-right: 0;
+        vertical-align: top;
+        height:24px;
+    }
+    #searchImage{
+        margin:15px;
+        margin-left:3px;
+    }
+
+
+
+
+    /*-------------- BODY -------------*/
+    #body1{
+        padding-top: 58px;
+        padding-bottom: 30px;
+    }
+
+    #showExams{
+        padding-top: 58px;
+    }
+
+    #reset{
+        cursor: pointer;
+    }
+
+    #resetButton{
+        text-align: center;
+
+    }
+
+    #showData{
+        padding-left: 30%;
+        padding-right: 30%;
+        padding-top: 20px;
+    }
+
+    .hide{
+        display: none;
+    }
+    #loadMore{
+        color: purple;
+        cursor:pointer;
+    }
+
+
+    /*-------------- FOOTER -------------*/
+    #footer{
+        bottom:0;
+        height: 30px;
+    }
+
+    p#footerData{
+        text-align:center;
+    }
+}
+
+/* MOBILE SETTINGS*/
+/*@media (max-width: 1023px) {*/
+    @media (max-width: 799px) {
+    body{
+        background-color: #00a4ff;
+    }
+}
