@@ -11,7 +11,6 @@ function loadPage(){
         url: "/ajax/matters/allMatterJson",
         dataType: "json",
         success: function(response){
-            alert("Chiamata effettuata!")
             var template = $('#templateMatter').html();
             Mustache.parse(template);
             $('#showMatterData').empty();
