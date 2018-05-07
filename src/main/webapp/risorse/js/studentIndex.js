@@ -11,6 +11,7 @@ $(document).ready( function() {
 
 
 function validateForm(){
+    //TODO FIX
     //recuperare valore con selettore jQuery
     var x = document.forms["myForm"]["firstname"].value;
     if (x == "") {
