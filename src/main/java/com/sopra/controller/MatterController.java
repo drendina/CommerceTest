@@ -50,10 +50,10 @@ public class MatterController {
 
 
     //Delete
-    @RequestMapping(method = RequestMethod.GET, value = "/filterMatter")
-    public ModelAndView filterMatter (@RequestParam String name) {
-        logger.info("filter matters");
-        matterMv.addObject("matterList", matterService.mattersByName(name));
+    @RequestMapping(method = RequestMethod.GET, value = "/deleteMatter")
+    public ModelAndView deleteMatter (@RequestParam int id){
+        logger.info("deleting matter with id :" + id);
+                matterService.deleteMatter(id);
         return matterMv;
     }
 }

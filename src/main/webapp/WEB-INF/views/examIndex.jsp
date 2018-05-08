@@ -1,6 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 <head>
     <title><spring:message code="message.examIndex_pageTitle"/></title>
@@ -12,22 +13,8 @@
     <div id = "title">
         <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
         <p id="pageName"><spring:message code="message.examIndex_title"/></p>
-        
-        <script language="JavaScript">
-            function goThere(form){
-                var linkList=form.selectThis.selectedIndex
-                if(!linkList==""){window.location.href=form.selectThis.options[linkList].value;}
-            }
-        </script>
-    
-        <form name="MenuTendina">
-            <select name="selectThis" size="1" onChange="goThere(this.form);">
-                <option selected value=""><spring:message code="message.index_language"/>
-                <option value="/exams/examIndex/?lang=it"><spring:message code="message.index_languageIt"/>
-                <option value="/exams/examIndex/?lang=en"><spring:message code="message.index_languageEn"/>
-            </select>
-        </form>
-        
+        <a class="flags" href="/exams/examIndex/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
+        <a class="flags" href="/exams/examIndex/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
     </div>
 
     <div id = "search">
@@ -56,13 +43,11 @@
                         <td> ${esame.idStudente} </td>
                         <td> ${esame.data} </td>
                         <td> ${esame.voto} </td>
-                        <%--<td><a href="/index/modify?id=${student.id}">Modify</a></td>--%>
-                        <%--<td><a href="/index/delete?id=${student.id}">Delete</a></td>--%>
                     </tr>
                 </c:forEach>
             </table>
-        
         </div>
+        
         
         <form:form method="GET" action="/index/">
             <input type="submit" value="<spring:message code="message.general_returnLink"/>">
@@ -73,7 +58,9 @@
         </form:form>
     
     </div>
-
-
+    <script src="/risorse/node_modules/jquery/src/jquery.js"></script>
+    <script src="/risorse/node_modules/mustache/mustache.js"></script>
+    <script type="text/javascript" src="/risorse/js/studentBio.js"></script>
+    
 </body>
 </html>

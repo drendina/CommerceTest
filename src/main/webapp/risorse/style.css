@@ -61,6 +61,9 @@ form{
         display:inline;
         background-color: #c1eeff;
     }
+    .flags{
+        display:inline;
+    }
 
     #searchText{
         margin:15px;

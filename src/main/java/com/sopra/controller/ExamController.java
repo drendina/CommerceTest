@@ -67,7 +67,6 @@ public class ExamController {
     }
 
     //FILTER
-    //TODO
     @RequestMapping(method = RequestMethod.GET, value = "/filter")
     public ModelAndView filterByName(@RequestParam String name) {
         examMv.addObject("lista", examService.filterByName(name));

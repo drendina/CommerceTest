@@ -16,24 +16,13 @@
     <div id = "title">
         <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
         <p id="pageName"><spring:message code="message.matterIndex_title"/></p>
-        
-            <script language="JavaScript">
-                function goThere(form){
-                    var linkList=form.selectThis.selectedIndex
-                    if(!linkList==""){window.location.href=form.selectThis.options[linkList].value;}
-                }
-            </script>
-        
-            <form name="MenuTendina">
-                <select name="selectThis" size="1" onChange="goThere(this.form);">
-                    <option selected value=""><spring:message code="message.index_language"/>
-                    <option value="/matters/matterView/?lang=it"><spring:message code="message.index_languageIt"/>
-                    <option value="/matters/matterView/?lang=en"><spring:message code="message.index_languageEn"/>
-                </select>
-            </form>
-        
+        <a class="flags" href="/matters/matterView/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
+        <a class="flags" href="/matters/matterView/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
     </div>
+    
+    
     <div id = "search">
+       
         <form method="GET" action="${matter_basepath}/filterMatter">
             <input id="searchText" type="text" name="name" autocomplete="off">
             <input id="searchImage" type="image" src="<c:url value="/risorse/img/magnifier.png"/>">
@@ -47,6 +36,9 @@
                     <li>
                         {{idEsame}}
                         {{nomeEsame}}
+                        <button><a href="${matter_basepath}/deleteMatter?id={{idEsame}}">
+                            <spring:message code="message.studentIndex_delete"/></a></button>
+
                     </li>
     </script>
     <ul id="showMatterData"></ul>
@@ -67,7 +59,7 @@
 </form:form>
 
 
-<script src="/risorse/node_modules/jquery/src/jquery.js"></script>
+<script src="/risorse/node_modules/jquery/dist/jquery.js"></script>
 <script src="/risorse/node_modules/mustache/mustache.js"></script>
 <script type="text/javascript" src="/risorse/js/matterIndex.js"></script>
 

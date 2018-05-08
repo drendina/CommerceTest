@@ -24,7 +24,7 @@
     <!--configurazione con annotation-->
     <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/risorse/**" location="/risorse/"/>
+    <mvc:resources mapping="/risorse/**" location="/risorse/" cache-period="0"/>
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -66,7 +66,7 @@
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="en"/>
     </bean>
-    
+
     <mvc:interceptors>
         <bean id="localeChangeInterceptor"
               class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">

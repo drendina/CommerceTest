@@ -1,12 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 
     <head>
         <title><spring:message code="message.index_pageTitle"/></title>
-        <link href="<c:url value="/risorse/style.css" />" rel="stylesheet">
+        <link href="<c:url value="/risorse/style.css?=${version}" />" rel="stylesheet">
     </head>
 
     <body>
@@ -19,8 +19,8 @@
             </div>
         
             <div id = "language">
-                 <h5><spring:message code="message.index_language"/></h5>
-                    <a href="/index/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="64" height="64"></a>
+                    <a class="flags" href="/index/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
+                    <a class="flags" href="/index/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
             </div>
             
         </div>
@@ -45,5 +45,9 @@
             </div>
             
         </div>
+    
+    <script src="/risorse/node_modules/jquery/src/jquery.js"></script>
+    <script src="/risorse/node_modules/mustache/mustache.js"></script>
+    <script type="text/javascript" src="/risorse/js/studentBio.js"></script>
     </body>
 </html>

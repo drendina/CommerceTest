@@ -1,14 +1,14 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
     <head>
         <title><spring:message code="message.studentBio_pageTitle"/></title>
         <link href="<c:url value="/risorse/style.css" />" rel="stylesheet">
-    
     </head>
     
     <body>
+        <!-- ---------------- HEADER ----------------------- -->
         <div id = "header">
             <div id = "title">
                 <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
@@ -16,7 +16,8 @@
             </div>
             
         </div>
-        
+
+        <!-- ---------------- BODY ----------------------- -->
         <div id = "body1">
             
                 <c:set var="stud" value="${studente}"/>
@@ -75,10 +76,16 @@
                 </table>
             </form:form>
         </div>
+
+        <form:form method="GET" action="/index/">
+            <input type="submit"  value="<spring:message code="message.general_returnLink"/>">
+        </form:form>
+        
+        <!-- ---------------- FOOTER ----------------------- -->
+       
         <script src="/risorse/node_modules/jquery/src/jquery.js"></script>
         <script src="/risorse/node_modules/mustache/mustache.js"></script>
         <script type="text/javascript" src="/risorse/js/studentBio.js"></script>
-            
-        </div>
     </body>
+    
 </html>

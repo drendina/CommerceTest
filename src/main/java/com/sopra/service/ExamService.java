@@ -11,4 +11,5 @@ public interface ExamService {
     List showAllExamsByStudentId(int id);
     EsameSostenuto getEsameById(int id);
     void deleteExam(EsameSostenuto esame);
+
 }

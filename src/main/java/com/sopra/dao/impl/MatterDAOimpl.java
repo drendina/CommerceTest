@@ -39,4 +39,15 @@ public class MatterDAOimpl implements MatterDAO {
         Materia E = new Materia(name);
         sessionFactory.getCurrentSession().persist(E);
     }
+    @Override
+    public void deleteMatter(int id){
+        List temp = sessionFactory
+                .getCurrentSession()
+                .createQuery("FROM Materia M WHERE M.idEsame = :id_esame")
+                .setParameter("id_esame", id)
+                .list();
+        Materia materia = (Materia) temp.get(0);
+                logger.info(materia);
+        sessionFactory.getCurrentSession().delete(materia);
+    }
 }
