@@ -68,9 +68,9 @@
              <p id="footerData">Daniele Rendina</p>
          </div>
 
-        <!-- <script src="/risorse/node_modules/jquery/dist/jquery.js"></script>
+        <script src="/risorse/node_modules/jquery/dist/jquery.js"></script>
         <script src="/risorse/node_modules/mustache/mustache.js"></script>
-        <script type="text/javascript" src="/risorse/js/studentIndex.js"></script> -->
-        <%@include file="script.jsp"%>
+        <script type="text/javascript" src="/risorse/js/studentIndex.js"></script>
+        
      </body>
  </html>

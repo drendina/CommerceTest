@@ -45,9 +45,17 @@
             </div>
             
         </div>
+        
+        <form:form method="get" action="/index/changeLanguageEnglish">
+            <input type="submit" value="English">
+        </form:form>
+
+        <form:form method="get" action="/index/changeLanguageItalian">
+            <input type="submit" value="Italiano">
+        </form:form>
+        
     
-    <script src="/risorse/node_modules/jquery/src/jquery.js"></script>
+    <script src="/risorse/node_modules/jquery/dist/jquery.js"></script>
     <script src="/risorse/node_modules/mustache/mustache.js"></script>
-    <script type="text/javascript" src="/risorse/js/studentBio.js"></script>
     </body>
 </html>

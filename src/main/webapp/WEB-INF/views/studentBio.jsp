@@ -1,6 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+<tag:import />
 <html>
     <head>
         <title><spring:message code="message.studentBio_pageTitle"/></title>
@@ -9,6 +12,10 @@
     
     <body>
         <!-- ---------------- HEADER ----------------------- -->
+        
+        
+        <tag:import />
+        
         <div id = "header">
             <div id = "title">
                 <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
@@ -83,7 +90,7 @@
         
         <!-- ---------------- FOOTER ----------------------- -->
        
-        <script src="/risorse/node_modules/jquery/src/jquery.js"></script>
+        <script src="/risorse/node_modules/jquery/dist/jquery.js"></script>
         <script src="/risorse/node_modules/mustache/mustache.js"></script>
         <script type="text/javascript" src="/risorse/js/studentBio.js"></script>
     </body>
