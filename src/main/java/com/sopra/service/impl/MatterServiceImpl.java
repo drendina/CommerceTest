@@ -24,13 +24,12 @@ public class MatterServiceImpl implements MatterService {
     }
 
     @Override
-    public List mattersByName(String name){
-        logger.info("passing: extract matters by name");
-        return matterDAO.extractMatterListByName(name);
+    public void insertMatter(String name){
+        matterDAO.insertMatterWithName(name);
     }
 
     @Override
-    public void insertMatter(String name){
-        matterDAO.insertMatterWithName(name);
+    public void deleteMatter(int id) {
+        matterDAO.deleteMatter(id);
     }
 }

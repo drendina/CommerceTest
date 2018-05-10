@@ -1,23 +1,24 @@
 $(document).ready( function() {
-
+    refresh();
     $('.show-button').on('click', function () {
         $('.login-form').slideToggle();
     });
 
-    $('.ajax-button').on('click', refresh());
+    $('.ajax-button').on('click', validateForm);
 
 });
 
 
 
 function validateForm(){
-    //recuperare valore con selettore jQuery
-    var x = document.forms["myForm"]["firstname"].value;
+    //TODO recuperare valore con selettore jQuery
+    alert("pippo");
+     var x = document.forms["myForm"]["firstname"].value;
     if (x == "") {
         alert("Name must be filled out");
         return false;
     }
-    var y = document.forms["myForm"]["lastname"].value;
+     var y = document.forms["myForm"]["lastname"].value;
     if (y == ""){
         alert("Surname must be filled out");
         return false;

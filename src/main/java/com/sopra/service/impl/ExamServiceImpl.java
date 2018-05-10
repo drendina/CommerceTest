@@ -59,5 +59,8 @@ public class ExamServiceImpl implements ExamService {
 
     public EsameSostenuto getEsameById(int id) {
         logger.info("get esame by id :" + id);
-        return examDAO.getEsameById(id);}
+        return examDAO.getEsameById(id);
+    }
+
+
 }

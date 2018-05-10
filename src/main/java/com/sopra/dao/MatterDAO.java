@@ -6,4 +6,5 @@ public interface MatterDAO  {
     List extractMatterList();
     List extractMatterListByName(String name);
     void insertMatterWithName(String name);
+    void deleteMatter(int id);
 }

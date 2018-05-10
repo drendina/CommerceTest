@@ -1,28 +1,61 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 
     <head>
-        <title>STUDENTI HOMEPAGE</title>
-        <link href="<c:url value="/risorse/style.css" />" rel="stylesheet">
+        <title><spring:message code="message.index_pageTitle"/></title>
+        <link href="<c:url value="/risorse/style.css?=${version}" />" rel="stylesheet">
     </head>
 
     <body>
-        <h1>Homepage</h1>
+    <!-- ---------------- HEADER ----------------------- -->
+        <div id = "header">
+            <div id = "title">
+                <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
+                <p id="pageName"> <spring:message code="message.index_title"/>
+                </p>
+            </div>
         
-        <div class="buttonCustom">
-            <form:form method="GET" action="/students/all">
-                <input type="submit" value="Gestione Studenti">
-            </form:form>
+            <div id = "language">
+                    <a class="flags" href="/index/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
+                    <a class="flags" href="/index/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
+            </div>
             
-            <form:form method="GET" action="/matters/matterView">
-                <input id="GMDE" type="submit" value="Gestione Materie d'Esame">
-            </form:form>
-    
-            <form:form method="GET" action="/exams/examIndex">
-                <input type="submit" value="Gestione Esami Effettuati">
-            </form:form>
         </div>
+    
+        <!-- ---------------- BODY ----------------------- -->
+        <div id = "body1">
+    
+            <br>
+            <div class="buttonCustom">
+                <form:form method="GET" action="/students/all">
+                    <input type="submit" value="<spring:message code="message.index_students"/>">
+                </form:form>
+                
+                <form:form method="GET" action="/matters/matterView">
+                    <input id="GMDE" type="submit" value="<spring:message code="message.index_matters"/>">
+                </form:form>
+        
+                <form:form method="GET" action="/exams/examIndex">
+                    <input type="submit" value="<spring:message code="message.index_exams"/>">
+                </form:form>
+                <br>
+            </div>
+            
+        </div>
+        
+        <form:form method="get" action="/index/changeLanguageEnglish">
+            <input type="submit" value="English">
+        </form:form>
+
+        <form:form method="get" action="/index/changeLanguageItalian">
+            <input type="submit" value="Italiano">
+        </form:form>
+        
+    
+    <script src="/risorse/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/risorse/node_modules/mustache/mustache.js"></script>
     </body>
 </html>

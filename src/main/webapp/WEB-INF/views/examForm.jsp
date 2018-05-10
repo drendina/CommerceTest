@@ -1,10 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
-    <title>Exam Form</title>
+    <title><spring:message code="message.examForm_pageTitle"/></title>
     <link href="<c:url value="/risorse/style.css" />" rel="stylesheet">
 </head>
 
@@ -12,7 +13,7 @@
     <div id = "header">
         <div id = "title">
             <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
-            <p id="pageName">DATABASE STUDENTI</p>
+            <p id="pageName"><spring:message code="message.examForm_title"/></p>
         </div>
         <div id = "search">
             <form method="GET" action="${exam_basepath}/filter">
@@ -23,12 +24,12 @@
     </div>
     
     <div id = "body1" >
-        <div style="float:left; display:block; width:45%; margin: 20px; background-color:#b66dff;">
+        <div>
             
             <form:form method="POST" action="${exam_basepath}/insert" modelAttribute="esame">
                 <table>
                     <tr>
-                        <td><form:label path="idStudente">Studente</form:label></td>
+                        <td><form:label path="idStudente"><spring:message code="message.examForm_student"/></form:label></td>
                         <td>
                             <form:select path="idStudente">
                                 <form:option value="-1" label="--- Select ---"/>
@@ -38,7 +39,7 @@
                     </tr>
                     
                     <tr>
-                        <td><form:label path="idEsame">Materia</form:label></td>
+                        <td><form:label path="idEsame"><spring:message code="message.examForm_matter"/></form:label></td>
                         <td>
                             <form:select path="idEsame">
                                <form:option value="-1" label="--- Select ---"/>
@@ -48,17 +49,17 @@
                     </tr>
                     
                     <tr>
-                        <td><form:label path="data">Data</form:label></td>
+                        <td><form:label path="data"><spring:message code="message.examForm_date"/></form:label></td>
                         <td><form:input type="date" path="data"/></td>
                     </tr>
                     
                     <tr>
-                        <td><form:label path="voto">Voto</form:label></td>
+                        <td><form:label path="voto"><spring:message code="message.examForm_vote"/></form:label></td>
                         <td><form:input path="voto"/></td>
                     </tr>
                     
                     <tr>
-                        <td><input type="submit" value="Submit"/></td>
+                        <td><input type="submit" value="<spring:message code="message.general_submit"/>"/></td>
                     </tr>
                 </table>
             </form:form>

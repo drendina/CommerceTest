@@ -31,6 +31,7 @@ public class ExamDAOimpl implements ExamDAO {
                 .createQuery("FROM EsameSostenuto")
                 .list();
     }
+
     @Override
     public void insertExam(EsameSostenuto esameSostenuto){
         logger.info("insertExam");
@@ -59,4 +60,5 @@ public class ExamDAOimpl implements ExamDAO {
         return (EsameSostenuto) sessionFactory.getCurrentSession()
                 .get(EsameSostenuto.class, id);
     }
+
 }
