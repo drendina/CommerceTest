@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@page session="true"%>
 
 <html>
 
@@ -28,6 +29,14 @@
         <!-- ---------------- BODY ----------------------- -->
         <div id = "body1">
     
+            <h1>Title : ${title}</h1>
+            <h1>Message : ${message}</h1>
+    <%--
+            <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <h2>Welcome : ${pageContext.request.userPrincipal.name}
+                    | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a></h2>
+            </c:if>
+    --%>
             <br>
             <div class="buttonCustom">
                 <form:form method="GET" action="/students/all">
@@ -40,6 +49,10 @@
         
                 <form:form method="GET" action="/exams/examIndex">
                     <input type="submit" value="<spring:message code="message.index_exams"/>">
+                </form:form>
+    
+                <form:form method="GET" action="/user/registration">
+                    <input type="submit" value="Registrati!">
                 </form:form>
                 <br>
             </div>

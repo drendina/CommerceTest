@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class GlobalController {
 
     private static final Logger logger = Logger.getLogger(GlobalController.class);
-    private ModelAndView mv = new ModelAndView("index");
+    private ModelAndView mv = new ModelAndView("pre_index");
 
     @RequestMapping(value = "/")
     public ModelAndView homePage(){
