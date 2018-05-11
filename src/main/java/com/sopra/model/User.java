@@ -1,5 +1,6 @@
 package com.sopra.model;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;

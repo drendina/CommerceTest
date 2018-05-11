@@ -26,5 +26,17 @@ public class UserDAOImpl implements UserDAO {
                 .persist(user);
     }
 
+    @Override
+    public User login(String email, String password){
+        logger.info("login");
+        User user = (User) (sessionFactory.getCurrentSession()
+                .createQuery("FROM User U WHERE U.email = :email AND U.password = :password")
+                .setParameter("email", email)
+                .setParameter("password", password)
+                .list()).get(0);
+        logger.info(user);
+
+        return user;
+    }
 
 }

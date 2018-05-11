@@ -47,7 +47,10 @@
             <form:form method="GET" action="/index/">
                 <input type="submit" value="<spring:message code="message.general_returnLink"/>">
             </form:form>
-            
+            <br>
+            <%=session.getAttribute("name")%>
+            <%=session.getAttribute("surname")%>
+            <br>
             <script id="template" type="x-tmpl-mustache">
                     <li>
                         {{id}}

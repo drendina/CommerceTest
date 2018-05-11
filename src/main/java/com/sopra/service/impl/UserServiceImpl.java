@@ -1,6 +1,7 @@
 package com.sopra.service.impl;
 
 import com.sopra.dao.UserDAO;
+import com.sopra.form.UserForm;
 import com.sopra.model.User;
 import com.sopra.service.UserService;
 import org.apache.log4j.Logger;
@@ -21,5 +22,11 @@ public class UserServiceImpl implements UserService {
     public void registerNewUser(User user) {
         logger.info("registerNewUser" + user);
         userDao.registerNewUser(user);
+    }
+
+    //SEARCH USER FOR LOGGING
+    @Override
+    public User login(String email, String password){
+        return userDao.login(email, password);
     }
 }

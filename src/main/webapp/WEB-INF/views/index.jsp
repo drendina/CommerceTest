@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@page session="true"%>
 
 <html>
 
@@ -22,21 +21,27 @@
             <div id = "language">
                     <a class="flags" href="/index/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
                     <a class="flags" href="/index/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
+                <form:form method="GET" action="/index/login" modelAttribute="user">
+                    Email: <form:input path="email"/>
+                    <br>
+                    Password: <form:input path="password"/>
+                    <input type="submit" value="Login">
+                </form:form>
+                
+                
             </div>
             
         </div>
     
         <!-- ---------------- BODY ----------------------- -->
-        <div id = "body1">
-    
-            <h1>Title : ${title}</h1>
-            <h1>Message : ${message}</h1>
-    <%--
-            <c:if test="${pageContext.request.userPrincipal.name != null}">
-                <h2>Welcome : ${pageContext.request.userPrincipal.name}
-                    | <a href="<c:url value="/j_spring_security_logout" />" > Logout</a></h2>
-            </c:if>
-    --%>
+        <div id="body1">
+            <br>
+            <%=session.getAttribute("name")%>
+            <%=session.getAttribute("surname")%>
+            <br>
+            <form:form method="post" action="/index/logout">
+                <input type="submit" value="Logout">
+            </form:form>
             <br>
             <div class="buttonCustom">
                 <form:form method="GET" action="/students/all">
