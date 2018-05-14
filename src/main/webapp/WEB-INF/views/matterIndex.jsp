@@ -14,14 +14,33 @@
 
 <div id = "header">
     <div id = "title">
-        <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
+        <a href="/index/"><img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>"></a>
         <p id="pageName"><spring:message code="message.matterIndex_title"/></p>
-        <a class="flags" href="/matters/matterView/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
-        <a class="flags" href="/matters/matterView/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
+        <a class="flags" href="/index/changeLanguageItalian"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
+        <a class="flags" href="/index/changeLanguageEnglish"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
     </div>
     
     
     <div id = "search">
+        
+        <c:choose>
+            <c:when test="${empty name}">
+            
+                <%= "" %>
+            </c:when>
+            <c:otherwise>
+                <form:form method="post" action="/index/logout" id="registerForm">
+                    <%=session.getAttribute("name")%>
+                    <%=session.getAttribute("surname")%>
+                
+                    <form:form method="post" action="/index/logout">
+                        <input type="submit" value="Logout">
+                    </form:form>
+                </form:form>
+            </c:otherwise>
+        </c:choose>
+    
+      
        
         <form method="GET" action="${matter_basepath}/filterMatter">
             <input id="searchText" type="text" name="name" autocomplete="off">

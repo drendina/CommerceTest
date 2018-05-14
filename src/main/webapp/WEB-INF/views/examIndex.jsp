@@ -11,13 +11,31 @@
 
 <div id = "header">
     <div id = "title">
-        <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
+        <a href="/index/"><img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>"></a>
         <p id="pageName"><spring:message code="message.examIndex_title"/></p>
-        <a class="flags" href="/exams/examIndex/?lang=it"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
-        <a class="flags" href="/exams/examIndex/?lang=en"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
+        <a class="flags" href="/index/changeLanguageItalian"><img border="0" alt="Italian" src="/risorse/img/italy.png" width="32" height="24"></a>
+        <a class="flags" href="/index/changeLanguageEnglish"><img border="0" alt="English" src="/risorse/img/uk.png" width="32" height="24"></a>
     </div>
 
     <div id = "search">
+    
+        <c:choose>
+            <c:when test="${empty name}">
+            
+                <%= "" %>
+            </c:when>
+            <c:otherwise>
+                <form:form method="post" action="/index/logout" id="registerForm">
+                    <%=session.getAttribute("name")%>
+                    <%=session.getAttribute("surname")%>
+                
+                    <form:form method="post" action="/index/logout">
+                        <input type="submit" value="Logout">
+                    </form:form>
+                </form:form>
+            </c:otherwise>
+        </c:choose>
+        
         <form method="GET" action="/index/filter">
             <input id="searchText" type="text" name="name" autocomplete="off">
             <input id="searchImage" type="image" src="<c:url value="/risorse/img/magnifier.png"/>">
@@ -27,13 +45,12 @@
 
     
     <div id = "body1">
+
         <div id="showData">
             <table>
                 <tr>
                     <td>id Materia</td>
-                    <%-- TODO al posto di id materia ci andrebbe il nome della materia --%>
                     <td>id Studente</td>
-                    <%-- TODO al posto di id studente ci andrebbe il nome dello studente --%>
                     <td>Data</td>
                     <td>Voto</td>
                 </tr>
@@ -49,9 +66,6 @@
         </div>
         
         
-        <form:form method="GET" action="/index/">
-            <input type="submit" value="<spring:message code="message.general_returnLink"/>">
-        </form:form>
         
         <form:form method="GET" action="${exam_basepath}/insertExam">
             <input type="submit" value="<spring:message code="message.examIndex_insert"/>">

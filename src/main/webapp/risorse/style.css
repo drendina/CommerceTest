@@ -44,12 +44,14 @@ form{
     #databaseImage{
         padding:3px;
         display:inline;
+        vertical-align: middle;
+
     }
     #pageName{
         font-style: italic;
         height: 50px;
         display:inline;
-        vertical-align: top;
+        vertical-align: middle;
     }
 
     #search{
@@ -58,11 +60,13 @@ form{
     }
 
     #language{
-        display:inline;
         background-color: #c1eeff;
     }
     .flags{
-        display:inline;
+       margin-top: 2px;
+    }
+    #italianFlag{
+        margin-left: 50px;
     }
 
     #searchText{
@@ -75,6 +79,29 @@ form{
         margin:15px;
         margin-left:3px;
     }
+
+    #emailInput{
+        margin-left: 27px;
+        margin-bottom: 3px;
+    }
+
+    #register{
+        margin-left: 50px;
+        margin-top: 1px;
+    }
+
+    #registerForm{
+        float:left;
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+
+    /*tutti i figli (di primo grado perchè c'è il minore) ereditano questa proprietà
+    sembra non andare...*/
+    title > *{
+        vertical-align: middle;
+    }
+
 
 
 
@@ -110,6 +137,17 @@ form{
     #loadMore{
         color: purple;
         cursor:pointer;
+    }
+    .buttonCustom{
+        display: flex;
+    }
+
+    .desc{
+        font-size: 16px;
+    }
+
+    #firstLeft{
+        margin-left: 90px;
     }
 
 

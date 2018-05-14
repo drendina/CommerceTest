@@ -12,10 +12,28 @@
 <body>
     <div id = "header">
         <div id = "title">
-            <img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>">
+            <a href="/index/"><img id="databaseImage" src="<c:url value="/risorse/img/database48.png"/>"></a>
             <p id="pageName"><spring:message code="message.examForm_title"/></p>
         </div>
         <div id = "search">
+    
+            <c:choose>
+                <c:when test="${empty name}">
+            
+                    <%= "" %>
+                </c:when>
+                <c:otherwise>
+                    <form:form method="post" action="/index/logout" id="registerForm">
+                        <%=session.getAttribute("name")%>
+                        <%=session.getAttribute("surname")%>
+                
+                        <form:form method="post" action="/index/logout">
+                            <input type="submit" value="Logout">
+                        </form:form>
+                    </form:form>
+                </c:otherwise>
+            </c:choose>
+            
             <form method="GET" action="${exam_basepath}/filter">
                 <input id="searchText" type="text" name="name" autocomplete="off">
                 <input id="searchImage" type="image" src="<c:url value="/risorse/img/magnifier.png"/>">
@@ -24,8 +42,8 @@
     </div>
     
     <div id = "body1" >
+        
         <div>
-            
             <form:form method="POST" action="${exam_basepath}/insert" modelAttribute="esame">
                 <table>
                     <tr>
